@@ -1,10 +1,10 @@
 <?php
 
 /**
- * This sample creates a reporting job by:
+ * This sample retrieves reports created by a specific job by:
  *
- * 1. Listing the available report types using the "reportTypes.list" method.
- * 2. Creating a reporting job using the "jobs.create" method.
+ * 1. Listing the jobs using the "jobs.list" method.
+ * 2. Retrieving reports using the "reports.list" method.
  *
  * @author Ibrahim Ulukaya
  */
@@ -20,9 +20,11 @@
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
   throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'/api-samples/php');
 }
+require_once 'google-api-php-client/autoload.php';
 
 require_once __DIR__ . '/vendor/autoload.php';
 session_start();
+
 
 /*
  * You can acquire an OAuth 2.0 client ID and client secret from the
@@ -39,9 +41,8 @@ $client->setClientId($OAUTH2_CLIENT_ID);
 $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 
 /*
- * This OAuth 2.0 access scope allows for read access to the YouTube Analytics monetary reports for
- * authenticated user's account. Any request that retrieves earnings or ad performance metrics must
- * use this scope.
+ * This OAuth 2.0 access scope allows for full read/write access to the
+ * authenticated user's account.
  */
 $client->setScopes('https://www.googleapis.com/auth/yt-analytics-monetary.readonly');
 $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
@@ -49,10 +50,10 @@ $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
 $client->setRedirectUri($redirect);
 
 // YouTube Reporting object used to make YouTube Reporting API requests.
-$youtubeReporting = new Google_Service_YouTubeReporting($client);
+$youtubeReporting = new Google_Service_YoutubeReporting($client);
 
 // Check if an auth token exists for the required scopes
-$tokenSessionKey = 'ya29.GlsiBOcTCuWx3qPkddGrj7Ep_rdJpCOZArUShUh0La6zz-r8AMcKnbt-xClIfYJxhtn7eaf2gkVdEuK17hhTAUKDa8AUNbvjYZqxmjPtg33SW10jomGTY-qocjMH' . $client->prepareScopes();
+$tokenSessionKey = 'token-' . $client->prepareScopes();
 if (isset($_GET['code'])) {
   if (strval($_SESSION['state']) !== strval($_GET['state'])) {
     die('The session state did not match.');
@@ -69,23 +70,24 @@ if (isset($_SESSION[$tokenSessionKey])) {
 
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
-  // This code executes if the user enters a name in the form
-  // and submits the form. Otherwise, the page displays the form above.
+  $htmlBody = '';
   try {
-    if (empty(listReportTypes($youtubeReporting, $htmlBody))) {
-      $htmlBody .= sprintf('<p>No report types found.</p>');
-    } else if ($_GET['reportTypeId']){
-      createReportingJob($youtubeReporting, $_GET['reportTypeId'], $_GET['jobName'], $htmlBody);
+    if (empty(listReportingJobs($youtubeReporting, $htmlBody))) {
+      $htmlBody .= sprintf('<p>No jobs found.</p>');
+    } else if ($_GET['reportUrl']){
+      downloadReport($youtubeReporting, $_GET['reportUrl'], $htmlBody);
+    } else if ($_GET['jobId']){
+      retrieveReports($youtubeReporting, $_GET['jobId'], $htmlBody);
     }
   } catch (Google_Service_Exception $e) {
-    $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
+    $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
         htmlspecialchars($e->getMessage()));
   } catch (Google_Exception $e) {
-    $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
+    $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
         htmlspecialchars($e->getMessage()));
   }
   $_SESSION[$tokenSessionKey] = $client->getAccessToken();
-} elseif ($OAUTH2_CLIENT_ID == '') {
+} elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
   $htmlBody = <<<END
   <h3>Client Credentials Required</h3>
   <p>
@@ -108,68 +110,90 @@ END;
 
 
 /**
- * Creates a reporting job. (jobs.create)
+ * Returns a list of reporting jobs. (jobs.listJobs)
  *
  * @param Google_Service_YouTubereporting $youtubeReporting YouTube Reporting service object.
- * @param string $reportTypeId Id of the job's report type.
- * @param string $name name of the job.
  * @param $htmlBody - html body.
  */
-function createReportingJob(Google_Service_YouTubeReporting $youtubeReporting, $reportTypeId,
-    $name, &$htmlBody) {
-  # Create a reporting job with a name and a report type id.
-  $reportingJob = new Google_Service_YouTubeReporting_Job();
-  $reportingJob->setReportTypeId($reportTypeId);
-  $reportingJob->setName($name);
+function listReportingJobs(Google_Service_YouTubeReporting $youtubeReporting, &$htmlBody) {
+  // Call the YouTube Reporting API's jobs.list method to retrieve reporting jobs.
+  $reportingJobs = $youtubeReporting->jobs->listJobs();
 
-  // Call the YouTube Reporting API's jobs.create method to create a job.
-  $jobCreateResponse = $youtubeReporting->jobs->create($reportingJob);
-
-  $htmlBody .= "<h2>Created reporting job</h2><ul>";
-  $htmlBody .= sprintf('<li>"%s" for reporting type "%s" at "%s"</li>',
-      $jobCreateResponse['name'], $jobCreateResponse['reportTypeId'], $jobCreateResponse['createTime']);
+  $htmlBody .= "<h3>Reporting Jobs</h3><ul>";
+  foreach ($reportingJobs as $job) {
+    $htmlBody .= sprintf('<li>id: "%s", name: "%s" report type: "%s"</li>', $job['id'],
+        $job['name'], $job['reportTypeId']);
+  }
   $htmlBody .= '</ul>';
+
+  return $reportingJobs;
 }
 
 
 /**
- * Returns a list of report types. (reportTypes.listReportTypes)
+ * Lists reports created by a specific job. (reports.listJobsReports)
  *
  * @param Google_Service_YouTubereporting $youtubeReporting YouTube Reporting service object.
+ * @param string $jobId The ID of the job.
  * @param $htmlBody - html body.
  */
-function listReportTypes(Google_Service_YouTubeReporting $youtubeReporting, &$htmlBody) {
-  // Call the YouTube Reporting API's reportTypes.list method to retrieve report types.
-  $reportTypes = $youtubeReporting->reportTypes->listReportTypes();
+function retrieveReports(Google_Service_YouTubeReporting $youtubeReporting, $jobId, &$htmlBody) {
+  // Call the YouTube Reporting API's reports.list method to retrieve reports created by a job.
+  $reports = $youtubeReporting->jobs_reports->listJobsReports($jobId);
 
-  $htmlBody .= "<h3>Report Types</h3><ul>";
-  foreach ($reportTypes as $reportType) {
-    $htmlBody .= sprintf('<li>id: "%s", name: "%s"</li>', $reportType['id'], $reportType['name']);
+  if (empty($reports)) {
+    $htmlBody .= sprintf('<p>No reports found.</p>');
+  } else {
+    $htmlBody .= sprintf('<h2>Reports for the job "%s"</h2><ul>', $jobId);
+    foreach ($reports as $report) {
+      $htmlBody .= sprintf('<li>From "%s" to "%s" downloadable at "%s"</li>',
+          $report['startTime'], $report['endTime'], $report['downloadUrl']);
+      $htmlBody .= '</ul>';
+    }
   }
-  $htmlBody .= '</ul>';
+}
 
-  return $reportTypes;
+
+/**
+ * Download the report specified by the URL. (media.download)
+ *
+ * @param Google_Service_YouTubereporting $youtubeReporting YouTube Reporting service object.
+ * @param string $reportUrl The URL of the report to be downloaded.
+ * @param $htmlBody - html body.
+ */
+function downloadReport(Google_Service_YouTubeReporting $youtubeReporting, $reportUrl, &$htmlBody) {
+  $client = $youtubeReporting->getClient();
+  // Setting the defer flag to true tells the client to return a request which can be called
+  // with ->execute(); instead of making the API call immediately.
+  $client->setDefer(true);
+
+  // Call the YouTube Reporting API's media.download method to download a report.
+  $request = $youtubeReporting->media->download("");
+  $request->setUrl($reportUrl);
+  $response = $client->execute($request);
+
+  file_put_contents("reportFile", $response->getResponseBody());
+  $client->setDefer(false);
 }
 ?>
 
 <!doctype html>
 <html>
 <head>
-<title>Create a reporting job</title>
+<title>Retrieve reports</title>
 </head>
 <body>
   <form method="GET">
     <div>
-      Job Name: <input type="text" id="jobName" name="jobName" placeholder="Enter Job Name">
+      Job Id: <input type="text" id="jobId" name="jobId" placeholder="Enter Job Id">
     </div>
     <br>
     <div>
-      Report Type Id: <input type="text" id="reportTypeId" name="reportTypeId" placeholder="Enter Report Type Id">
+      Report URL: <input type="text" id="reportUrl" name="reportUrl" placeholder="Enter Report Url">
     </div>
-    <br>
-    <input type="submit" value="Create!">
+    <br>    <input type="submit" value="Retrieve!">
   </form>
   <?=$htmlBody?>
 </body>
 </html>
-create_reporting_job.php
+retrieve_reports.php
