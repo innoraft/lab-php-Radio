@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Library Requirements
  *
@@ -9,7 +11,7 @@
  *    $ composer require google/apiclient:~2.0
  */
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-  throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'"');
+  throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'/api-samples/php');
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -34,13 +36,16 @@ if (isset($_GET['q']) && isset($_GET['maxResults'])) {
    * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
    * Please ensure that you have enabled the YouTube Data API for your project.
    */
-  $DEVELOPER_KEY = 'REPLACE_ME';
+  $DEVELOPER_KEY = 'AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY';
 
   $client = new Google_Client();
   $client->setDeveloperKey($DEVELOPER_KEY);
 
   // Define an object that will be used to make all API requests.
   $youtube = new Google_Service_YouTube($client);
+
+
+  
 
   $htmlBody = '';
   try {
@@ -50,6 +55,7 @@ if (isset($_GET['q']) && isset($_GET['maxResults'])) {
     $searchResponse = $youtube->search->listSearch('id,snippet', array(
       'q' => $_GET['q'],
       'maxResults' => $_GET['maxResults'],
+      'pageToken' => $_GET['pageToken']
     ));
 
     $videos = '';
@@ -91,6 +97,20 @@ END;
       htmlspecialchars($e->getMessage()));
   }
 }
+
+function get($key, $default=NULL) {
+ return array_key_exists($key, $_GET) ? $_GET[$key] : $default;
+}
+
+
+
+echo "<a href='search.php?page=1'>".'|<'."</a> "; // Goto 1st page  
+
+for ($i=1; $i<=$totalResults; $i++) { 
+            echo "<a href='search.php?page=".$i."'>".$i."</a> "; 
+}; 
+echo "<a href='https://www.googleapis.com/youtube/v3/search?pageToken=CGQQAA&part=snippet&maxResults=25&order=relevance&q=hello&topicId=%2Fm%2F02vx4&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY'>".'>|'."</a> "; // Goto last page
+
 ?>
 
 <!doctype html>

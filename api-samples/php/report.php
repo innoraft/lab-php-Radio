@@ -20,7 +20,6 @@
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
   throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'/api-samples/php');
 }
-require_once 'google-api-php-client/autoload.php';
 
 require_once __DIR__ . '/vendor/autoload.php';
 session_start();
@@ -33,8 +32,8 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
-$OAUTH2_CLIENT_ID = '195495926744-cmik8ve37c1uab7cpa6b09ogn2gk1cug.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = 'QVIo1MU_srAvJK5mQ22YR3tv';
+$OAUTH2_CLIENT_ID = 'REPLACE_ME';
+$OAUTH2_CLIENT_SECRET = 'REPLACE_ME';
 
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);

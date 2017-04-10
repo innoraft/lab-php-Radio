@@ -9,7 +9,7 @@
  *    $ composer require google/apiclient:~2.0
  */
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-  throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'"');
+  throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'/api-samples/php');
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -22,8 +22,8 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
-$OAUTH2_CLIENT_ID = 'REPLACE_ME';
-$OAUTH2_CLIENT_SECRET = 'REPLACE_ME';
+$OAUTH2_CLIENT_ID = '195495926744-ud8oh3gpij37tejdttq2e6trda7aqrsa.apps.googleusercontent.com';
+$OAUTH2_CLIENT_SECRET = 'J1Q3Fn5nKeF0Jn9oEYajztpr';
 
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
@@ -42,6 +42,9 @@ if (isset($_GET['code'])) {
   if (strval($_SESSION['state']) !== strval($_GET['state'])) {
     die('The session state did not match.');
   }
+
+// var_dump($_SESSION['state']);
+// var_dump($_GET['state']);
 
   $client->authenticate($_GET['code']);
   $_SESSION[$tokenSessionKey] = $client->getAccessToken();
@@ -107,14 +110,14 @@ if ($client->getAccessToken()) {
 
 
     // Read the media file and upload it chunk by chunk.
-    $status = false;
-    $handle = fopen($videoPath, "rb");
-    while (!$status && !feof($handle)) {
-      $chunk = fread($handle, $chunkSizeBytes);
-      $status = $media->nextChunk($chunk);
-    }
+    // $status = false;
+    // $handle = fopen($videoPath, "rb");
+    // while (!$status && !feof($handle)) {
+    //   $chunk = fread($handle, $chunkSizeBytes);
+    //   $status = $media->nextChunk($chunk);
+    // }
 
-    fclose($handle);
+    // fclose($handle);
 
     // If you want to make other calls after the file upload, set setDefer back to false
     $client->setDefer(false);
