@@ -39,7 +39,7 @@ if (isset($_SESSION['nexttoken'])){
 
 // $_SESSION['token'] = "def";
 
-header('Location: http://radio1.com/api-samples/php/tests.php');
+header('Location: http://radio1.com/api-samples/php/searchandadd.php');
 
 
 

@@ -30,8 +30,8 @@ $db = mysql_select_db("userdb",$conn);
   }
   else
 
-    echo "Successful";
-    echo "<br /><a href='input.html'>Let's get started</a>";
+   header('Location: http://radio1.com/api-samples/php/input.php');
+
 }
 
 else

@@ -9,7 +9,7 @@ echo $_SESSION['prevtoken'];
 
 if (isset($_SESSION['prevtoken'])){
 
-echo "abc";
+// echo "abc";
 
 	$prev = $_SESSION['prevtoken'];
 	$url = "https://www.googleapis.com/youtube/v3/search?pageToken=" . $prev . "&part=snippet&maxResults=25&order=relevance&q=ShapeOfYou&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY"; 
@@ -37,7 +37,7 @@ echo "abc";
 
 // $_SESSION['token'] = "def";
 
-header('Location: http://radio1.com/api-samples/php/tests.php');
+// header('Location: http://radio1.com/api-samples/php/tests.php');
 
 
 

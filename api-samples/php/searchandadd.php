@@ -4,40 +4,32 @@
 <head>
 	<title></title>
 	<!-- <script src="update2.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <body>
 
-<form action="next.php">
-  <input type="submit" value="NEXT">
+
+<br>
+
+<form action="welcome.php">
+	<input type="submit" value="GO BACK TO HOME" class = "button2" style="padding: 11px;">
 </form>
 
 <br>
 
-<form action="prev.php">
-	<input type="submit" value="PREV">
-</form>
 
-<br>
 
-<form action="showplaylist.php">
-	<input type="submit" value="SHOW PLAYLIST">
-</form>
-
-<br>
-  
-  <form action="createplaylist.php">
-	<input type="submit" value="CREATE PLAYLIST">
-</form>
 
 
    <script>
 $( document ).ready(function() {
     console.log( "ready!" );
     $("#demo > button").on("click", function(event) {
-            	console.log(this.id);
-            	var id = this.id;
-            	var url = "insertvideo.php?id=" + id;
+                console.log(this.id);
+                var id = this.id;
+                var url = "insertvideo.php?id=" + id;
           console.log(url);
                 event.preventDefault();
                 $.ajax({
@@ -52,9 +44,7 @@ $( document ).ready(function() {
                 });
             });
        
-});
-   
-            
+});     
         </script>
 
 
@@ -62,13 +52,26 @@ $( document ).ready(function() {
 session_start();
 
 $uid = $_SESSION['userID'];
-echo $uid;
+// echo $uid;
 
 if (isset($uid)) {
 
+echo "<form action='logout.php'>
+<input type='submit' value='Sign Out' style='background-color: #bb0000;
+                            color: #fff;
+                            font-family: Sans-serif;
+                            text-align: center;
+                            border: 0;
+                            transition: all 0.3s ease 0s;
+                            font-size: 20px;
+                            padding: 11px;
+                            float:right;'>
+</form>";
+
+
 
 $inactive = 60; 
-ini_set('session.gc_maxlifetime', $inactive); // set the session max lifetime to 2 hours
+ini_set('session.gc_maxlifetime', $inactive); 
 
 session_start();
 
@@ -82,7 +85,7 @@ $_SESSION['testing'] = time();
 
 session_start();
 
-echo $_SESSION['nexttoken'];
+// echo $_SESSION['nexttoken'];
 echo "<br>";
 echo $_SESSION['prevtoken'];
 
@@ -97,15 +100,15 @@ if (!isset($_SESSION['nexttoken']))
 
     $_SESSION['search'] = $_GET["q"]; 
 $search2 = $_SESSION['search'];
-echo $_SESSION['search'];
+// echo $_SESSION['search'];
 echo "<br>";
 $_SESSION['max'] = $_GET['maxResults'];
 $max2 = $_SESSION['max'];
-echo $_SESSION['max'];
+// echo $_SESSION['max'];
 
     $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY";
 
-    echo $url;
+    // echo $url;
 
     $ch = curl_init();  
 
@@ -138,11 +141,14 @@ echo $_SESSION['max'];
         // echo $_SESSION['songlist']['items'];
         // echo $value1;
 
-            echo $value1['snippet']['title']; 
+        ?>
+
+           <h4 class="title"> <?php echo $value1['snippet']['title']; ?></h4>
+           <?php 
             echo "<br>";
             $id = $value1['id']['videoId'];
             // $id2 = $_POST['id'];
-            echo $id;
+            // echo $id;
             session_start();
             $_SESSION['id'] = $id;
             // $_SESSION['session_id'] = "ksjksjdksjd";
@@ -150,13 +156,13 @@ echo $_SESSION['max'];
 
             // $_SESSION['id'] = $id;
             echo "<br>";
-        // echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
+        echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
 
         
 //  echo    "<form action='songlist.php' method='post'>
 //  <input type='submit' value='Add To Playlist' id='$id' name = 'id'/>
 // </form>";
-            echo $_SESSION['id'];
+            // echo $_SESSION['id'];
 
             
 
@@ -166,6 +172,13 @@ echo $_SESSION['max'];
                             name='button' 
                             id='$id' ,
                             method='POST'
+                            style='background-color: #bb0000;
+                            color: #fff;
+                            font-family: Sans-serif;
+                            text-align: center;
+                            border: 0;
+                            transition: all 0.3s ease 0s;
+                            padding:11px;'
                             >Add to playlist</button>
                     </form>";
 
@@ -183,9 +196,6 @@ echo $_SESSION['max'];
 
 
 
-echo "<form action='logout.php'>
-<input type='submit' value='Sign Out'>
-</form>";
 
 }
 
@@ -197,8 +207,11 @@ else
 
 ?>
 
+<br>
 
-
+<form action="next.php">
+  <input type="submit" value="NEXT" class = "button2" style="padding: 11px;"> 
+</form>
 
 
 </body>

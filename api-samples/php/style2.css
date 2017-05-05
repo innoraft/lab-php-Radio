@@ -1,0 +1,329 @@
+
+
+/*body{
+
+    background: url(https://www.pexels.com/photo/iphone-smartphone-technology-music-38295/) no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}*/
+#background-carousel{
+	position:fixed;
+	width:100%;
+	height:100%;
+	z-index:-1;
+}
+.carousel,
+.carousel-inner {
+	width:100%;
+	height:auto;
+	z-index:0;
+	overflow:hidden;
+}
+.item {
+	width:100%;
+	height:100%;
+	background-position:center center;
+	background-size:cover;
+	z-index:0;
+}
+
+.button{
+    
+    background-color: #660000;
+    color: #fff;
+    font-family: Sans-serif;
+    font-size: 20px;
+    height: 74px;
+    width: 183px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+    float : right;
+
+
+    }
+
+    .button2 {
+
+    background-color: #bb0000;
+    color: #fff;
+    font-family: Sans-serif;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+
+
+            }
+
+
+
+.button:hover {
+  background: #990000;
+}
+
+
+.header {
+text-align: center;
+color: white;
+font-size: 56px;
+margin-top: 114px;
+
+}
+
+.center {
+
+text-align: center;
+
+}
+
+.left {
+
+float: left;
+margin-top: 16px;
+
+}
+
+.nav {
+
+background-color: #660000;
+/*position: fixed;*/
+
+
+}
+
+.banner {
+
+background: url(background.jpg);
+background-size: 100% 100%;
+
+}
+
+.banner2 {
+
+background: url(background.jpg);
+background-size: 100% 100%;
+
+}
+
+.tag {
+
+text-align: center;
+color: white;
+padding-top: 253px;
+/*padding-bottom: 292px;*/
+font-size: 40px;
+
+}
+
+.tag2 {
+
+
+text-align: center;
+color: white;
+/*padding-top: 253px;*/
+padding-bottom: 292px;
+font-size: 21px;
+
+
+}
+.row {
+/*background-color: #bb0000;*/
+
+}
+
+.content {
+position: relative;
+background-image: url(search.jpeg);
+background-size: cover;
+    padding-top: 98px;
+    padding-bottom: 153px;
+    
+
+}
+
+.content2 {
+    position: relative;
+    background-image: url(playlist.jpg);
+background-size: cover;
+    padding-top: 98px;
+    padding-bottom: 153px;
+}
+
+.content3 {
+    position: relative;
+background-image: url(show.jpg);
+background-size: cover;
+    padding-top: 98px;
+    padding-bottom: 153px;
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #bb0000;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.a {
+text-decoration: none;
+color: white;
+}
+
+
+
+a.a:hover {
+text-decoration: none;
+color: white;
+}
+
+.name:hover .overlay {
+  bottom: 0;
+  height: 100%;
+  opacity: 0.5;
+
+}
+.form{
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    -moz-box-shadow: 0 0 20px #bb0000;
+    -webkit-box-shadow: 0 0 20px #bb0000;
+    box-shadow: 0 0 20px #bb0000;
+        margin-top: 187px;
+}
+
+.boot {
+
+margin-top: 81px;
+
+}
+
+.heading {
+
+margin-bottom: 90px;
+}
+
+.row {
+
+background-color: 
+
+}
+
+.footer {
+position: relative;
+background-color: #bb0000;
+color : white;
+margin-top: 141px;
+
+}
+
+.link {
+
+
+/*float: right*/;
+
+}
+
+.link a {
+
+color : white;
+text-decoration: none;
+font-size: 24px;
+
+}
+
+.link a:hover {
+color: black;
+
+}
+
+.wrapper {
+
+margin-top: 50px;
+
+}
+
+.icons {
+
+list-style-type: none;
+color: white;
+display: -webkit-inline-box;
+padding: 0;
+
+}
+
+.icons a {
+
+color : white;
+
+}
+
+.icons a:hover {
+
+color : black;
+
+}
+
+.margin {
+
+margin-right: 20px;
+
+}
+
+.overlay2 {
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  transition: .5s ease;
+  background-color: black;
+
+}
+
+.footer_address {
+
+    list-style-type: none;
+    font-size: 18px;
+    float: left;
+    line-height: 4;
+}
+
+.left2 {
+float :  left;
+
+}
+
+.fontsize {
+    margin-right: 17px;
+    font-size: 19px;
+
+}
+
