@@ -7,9 +7,6 @@ if (isset($uid)) {
 echo '<html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="animate.css">
-
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -51,7 +48,7 @@ SIGN OUT</button></a></button>
 <div class = "container-fluid bg-3 text-center boot">
 <div class = "row">
 
-<h2 class = "heading">SEARCH,CREATE & LISTEN</h2>
+<h2 class = "heading">SEARCH,CREATE & ANALIZE</h2>
 
 <div class = "col-md-4 name">
 <div class= "content">
@@ -64,7 +61,7 @@ SIGN OUT</button></a></button>
 <div class = "col-md-4 name">
 <div class = "content2">
 <div class="overlay"> 
-  <div class = "text"><a href="createplaylist.php" class = "a">CREATE PLAYLIST</a></div>
+  <div class = "text"><a href="chart.php" class = "a">SHOW ANALYTICS</a></div>
   </div>
 </div>
   
@@ -102,7 +99,7 @@ SIGN OUT</button></a></button>
 
 <ul class = "icons">
 
-					<li><a href="https://twitter.com/innoraft" target="_blank" class = "margin"><i class="fa fa-twitter fa-2x"></i></a></li>
+          <li><a href="https://twitter.com/innoraft" target="_blank" class = "margin"><i class="fa fa-twitter fa-2x"></i></a></li>
 
                       <li><a href="https://www.linkedin.com/company/innoraft" target="_blank" class = "margin"><i class="fa fa-linkedin fa-2x"></i></a></li>
 
@@ -114,32 +111,6 @@ SIGN OUT</button></a></button>
 
 </ul>
 </div>
-
-</div>
-</div>
-
-<div class = "container">
-<div class = "row">
-
-<h2>CONTACT US</h2>
-
-<div class = "col-md-2"></div>
-<div class="col-md-8">
-
-<ul class="footer_address">
-	<li class = "left2"><i class="fa fa-map-marker fontsize"></i>Kredent Tower, J-1/14, Block - EP &amp; GP, Sector - 5,Salt Lake City,Kolkata, India</li>
-	<br>
-	<li class = "left2"><i class="fa fa-map-marker fontsize"></i>3/283, Chitrakoot Yojna, Near Pratap Stadium, Jaipur, India </li>
-	<br>
-	<li class = "left2"><i class="fa fa-mobile fontsize"></i>tel:+91-033-40010578</li>
-</ul>
-
-</div>
-<div class="col-md-2"></div>
-
-</div>
-
-
 
 </div>
 </div>
@@ -159,6 +130,7 @@ else
 {
 
 echo "<a href = 'form.php'>Login To Continue</a>";
+include 'chart.php';
 
 }
 

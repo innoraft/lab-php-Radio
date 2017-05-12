@@ -37,13 +37,31 @@ if(isset($_POST['submit']))
   $mail=$_POST['email'];
   $password=$_POST['password'];
 
+  //Getting the username
+
+  $link = new mysqli( 'localhost', 'root', '123', 'userdb' );
+  $query = "SELECT NAME from users where EMAIL = '".$mail."' ";
+  $result = $link->query( $query );
+  $name = array();
+// Print out rows
+while ( $row = $result->fetch_assoc() ) {
+  $name = ($row['NAME']);
+ // echo $name;
+}
+
+
+
   $password=md5($password);
   $sql=mysql_query("SELECT * FROM users WHERE EMAIL='".$mail."'");
   $sql_row= mysql_num_rows($sql);
   $get_value= mysql_fetch_assoc($sql);
   $get_mail= $get_value['EMAIL'];
   $get_pass= $get_value['password'];
-  
+  $date = date("Y/m/d");
+
+
+
+
 
 }
 
@@ -62,13 +80,21 @@ if(isset($_POST['submit']))
               }
               else
               {
-                   echo"password invalid";
+                   echo"Invalid Password";
+                   echo '<br>';
+                   echo "<a href = 'form.php'>Try Again</a>";
               }
       }
 
       else {
             echo "not matched";
            }
+
+             $sql2 = mysql_query("INSERT into datedb (Username,mail,date) values ( '".$name."' ,'".$mail."' , '".$date."')");
+  if (!$sql2) {
+    echo "Failed" .mysql_error();
+  }
+  
     }
        else
 
@@ -88,30 +114,13 @@ $row=array();
 $db=mysqli_connect("localhost","root","123","userdb");
 $result ="SELECT userID from users where EMAIL = '".$mail."'";
 $res=$db->query($result);
-// $sql_row = mysql_num_rows($result);
 
-// echo "<table border='1'>
-// <tr>
-// <th>videoID</th>
-// <th>playlistID</th>
-// </tr>";
 if ($res > 0){
   
 
 while($row = mysqli_fetch_array($res))
 {
-// echo "<tr>";
-// echo "<td>" . $row['videoID'] . "</td>";
-// echo "<td>" . $row['playlistID'] . "</td>";
-// echo "</tr>";
 $_SESSION['userID'] = $row['userID'];
-echo $_SESSION['userID'];
-echo "<br>";
-// echo $row['playlistID'];
-
-    // echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
-
-
 }
 
 echo "</table>";
@@ -119,8 +128,31 @@ echo "</table>";
 mysqli_close($con);
 }
 
-?>
+?>  
 
+<!-- Generating the Date -->
+<?php
+
+$sql3 = mysql_query("SELECT Username from analytics where Username = '".$name."' and date = '".$date."' ");
+$sql_row3 = mysql_fetch_row($sql3);
+
+if ($sql_row3 > 0) {
+  echo "abc";
+}
+
+else
+{ 
+
+$time = date("h:i:sa");
+$stamp =  date("G:i", strtotime($time));
+$sql4 = "INSERT into analytics (Username,date,time) values ('".$name."' , '".$date."' , '".$stamp."')";
+
+$query4 = mysql_query($sql4);
+
+}
+
+
+?>
 </div>
 
 

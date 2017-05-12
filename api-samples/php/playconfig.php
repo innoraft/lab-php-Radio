@@ -9,6 +9,10 @@ $db = mysql_select_db("userdb",$conn);
   $UserName = $_POST['username'];
   $Playlist = $_POST['playlist'];
 
+    session_start();
+    $uid = $_SESSION['userID'];
+    echo $uid;
+
  
   $sql2=mysql_query("SELECT * FROM users WHERE NAME ='".$UserName."'");
   $sql_row= mysql_num_rows($sql2);
@@ -18,7 +22,7 @@ $db = mysql_select_db("userdb",$conn);
   
       // echo "abc";
   
-  $sql = "INSERT into playlist (Username,playlistname) values ('".$UserName."' , '".$Playlist."')";
+  $sql = "INSERT into playlist (Username,playlistname,userID) values ('".$UserName."' , '".$Playlist."', '".$uid."')";
 
   $query = mysql_query($sql);
 
@@ -30,7 +34,7 @@ $db = mysql_select_db("userdb",$conn);
   }
   else
 
-   header('Location: http://radio1.com/api-samples/php/input.php');
+   header('Location: http://radio.com/input.php');
 
 }
 

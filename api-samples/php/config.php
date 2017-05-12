@@ -26,6 +26,7 @@ $db = mysql_select_db("userdb",$conn);
   $password = md5($_POST['password']);
   $email= $_POST['email'];
 
+
 $whitelist = array("innoraft.com");
 
 function validateEmailDomain($email, $domains) {
@@ -39,30 +40,32 @@ function validateEmailDomain($email, $domains) {
             return true;
     }
 
-    return false;$sql_row= mysql_num_rows($sql3);
+    return false;
 }
 
 
-// mysql_query("INSERT into duplicate(NAME,EMAIL) values ('".$UserName."' ,  '".$email."')");
+$sql3 = mysql_query("SELECT * from users where NAME = '".$UserName."'");
+$sql_row = mysql_num_rows($sql3);
 
+if ($sql_row> 0)
+{
 
-
-$sql3 = mysql_query("SELECT NAME,EMAIL from users where NAME = '".$UserName."' and where EMAIL = '".$email."';");
-// echo $sql3;
-$sql_row= mysql_num_rows($sql3);
-
-if ($sql_row>0) {
-  echo "Already Exists";
+  echo "ALready Exists";
   echo "<br>";
-  echo "<a href = 'signupform.php'>Sign Up Again</a>";
+  echo "<a href = 'signupform.php'>Try Again</a>";
 }
 
 else {
 
+
 if (validateEmailDomain($email, $whitelist)){
 
+  session_start();
+$userID = strtotime("now");
+  // echo $userID;
 
-  $sql = "INSERT into users (NAME,EMAIL,password) values ('".$UserName."' , '".$email."', '".$password."')";
+
+  $sql = "INSERT into users (NAME,EMAIL,password,userID) values ('".$UserName."' , '".$email."', '".$password."', '".$userID."')";
 
   $query = mysql_query($sql);
 
@@ -74,42 +77,48 @@ if (validateEmailDomain($email, $whitelist)){
     echo "<br /><a href='signupform.php'>Signup Again</a>";
   }
   else
+  
 
     echo "Successful";
-    echo "<br /><a href='form.php'>Please Login</a>";
+    echo "<br /><a href='form.php'>Please Login Now</a>";
   }
 
   else
     echo "This domain name is not allowed";
+}
 
 
+
+
+  
 
 // Generating userID
 
-session_start();
-$userID = strtotime("now");
-  echo $userID;
+// session_start();
+// $userID = strtotime("now");
+//   echo $userID;
 
-  $sql2 = mysql_query("SELECT * FROM users where NAME = '".$UserName."'");
-  $sql_row2 = mysql_num_rows($sql2);
-  echo $sql_row2; 
+  // $sql2 = mysql_query("SELECT * FROM users where NAME = '".$UserName."'");
+  // $sql_row2 = mysql_num_rows($sql2);
+  // echo $sql_row2; 
 
-  if ($sql_row2>0){
+  // if ($sql_row2>0){
 
-    $query = mysql_query("UPDATE users set userID = '".$userID."' where NAME = '".$UserName."'");
+  //   $query = mysql_query("UPDATE users set userID = '".$userID."' where NAME = '".$UserName."'");
 
-  }
+  // }
 
-  else
-  {
-    $query = mysql_query("INSERT into users(userID) values ('".$userID."') where NAME = '".$UserName."' ");
-    if (!query){
-      echo "Failed" .mysql_error();
-    }
+  // else
+  // {
+  //   $query = mysql_query("INSERT into users(userID) values ('".$userID."') where NAME = '".$UserName."' ");
+  //   if (!query){
+  //     echo "Failed" .mysql_error();
+  //   }
 
-  }
+  // }
 
-}
+
+
 
 ?>
 

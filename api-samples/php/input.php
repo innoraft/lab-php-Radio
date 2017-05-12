@@ -14,7 +14,9 @@
 </form>
 
 <?php
+
 session_start();
+
 $uid = $_SESSION['userID'];
 // echo $uid;
 
@@ -57,7 +59,7 @@ echo '
 <form action="searchandadd.php">
 
 <div>
-    Search Videos: <input type="search" id="q" name="q" plceholder="Enter Search Term">
+    Search Videos: <input type="search" id="q" name="q" plceholder="Search Videos">
   </div>
   <div>
 

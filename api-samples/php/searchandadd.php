@@ -23,7 +23,7 @@
 
 
 
-   <script>
+    <script type="text/javascript">
 $( document ).ready(function() {
     console.log( "ready!" );
     $("#demo > button").on("click", function(event) {
@@ -38,14 +38,41 @@ $( document ).ready(function() {
                     data: '',
                     //id : $("#" . $id).val(),
                     success: function(data) {
-                        // $("#chatbox").append(data+"<br/>");
-                        // alert (data);
-                    },
+                        // document.getElementById("demo").innerHTML = "ADDED! ";
+                    },	
                 });
             });
        
 });     
         </script>
+
+
+            <script type="text/javascript">
+$( document ).ready(function() {
+    console.log( "count" );
+    $("#demo > button").on("click", function(event) {
+                console.log(this.id);
+                var id = this.id;
+                var title = $(this).attr('class');
+                console.log(title);
+                var url = "countvideo.php?id=" +id+"&title=" +title;
+          console.log(url);
+                event.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: '',
+                    success: function(data) {
+                        alert('Added!')
+                    },  
+                });
+            });
+       
+});     
+        </script>
+
+
+
 
 
 <?php
@@ -76,9 +103,7 @@ ini_set('session.gc_maxlifetime', $inactive);
 session_start();
 
 if (isset($_SESSION['testing']) && (time() - $_SESSION['testing'] > $inactive)) {
-    // last request was more than 2 hours ago
-    session_unset();     // unset $_SESSION variable for this page
-    session_destroy();   // destroy session data
+    session_unset($_SESSION['search']);     
 }
 $_SESSION['testing'] = time(); 
 
@@ -96,9 +121,9 @@ echo $_SESSION['prevtoken'];
 if (!isset($_SESSION['nexttoken']))
 
 {
+    $search = $_GET["q"];
 
-
-    $_SESSION['search'] = $_GET["q"]; 
+    $_SESSION['search'] = rawurlencode($search);
 $search2 = $_SESSION['search'];
 // echo $_SESSION['search'];
 echo "<br>";
@@ -137,41 +162,31 @@ $max2 = $_SESSION['max'];
 } 
 
 
+
+
     foreach ($_SESSION['songlist']['items'] as $key => $value1) {
-        // echo $_SESSION['songlist']['items'];
-        // echo $value1;
+
+        $name = $value1['snippet']['title'];
+        $title = rawurlencode($name);
+
 
         ?>
 
-           <h4 class="title"> <?php echo $value1['snippet']['title']; ?></h4>
+           <h4 class="title"> <?php echo $name; ?></h4>
            <?php 
             echo "<br>";
             $id = $value1['id']['videoId'];
-            // $id2 = $_POST['id'];
-            // echo $id;
+
             session_start();
             $_SESSION['id'] = $id;
-            // $_SESSION['session_id'] = "ksjksjdksjd";
-            // $_SESSION['id']++;
 
-            // $_SESSION['id'] = $id;
             echo "<br>";
         echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
 
-        
-//  echo    "<form action='songlist.php' method='post'>
-//  <input type='submit' value='Add To Playlist' id='$id' name = 'id'/>
-// </form>";
-            // echo $_SESSION['id'];
-
-            
-
-
-            echo "<form id='demo' method='POST' action=''>
+                    echo "<form id='demo' method='POST' action=''> 
                     <button type='button' 
                             name='button' 
-                            id='$id' ,
-                            method='POST'
+                            id=" . $id . " class=" . $title . " method='POST'
                             style='background-color: #bb0000;
                             color: #fff;
                             font-family: Sans-serif;
@@ -182,19 +197,8 @@ $max2 = $_SESSION['max'];
                             >Add to playlist</button>
                     </form>";
 
-        // echo "
-        // <form id='demo'method='POST'><input type='button' id='$id' onClick='reply_click(".$id.")' value='Add To Playlist'></form>";
 
-// echo $_GET['id.id'];
 }
-
-
-
-
-
-
-
-
 
 
 }
