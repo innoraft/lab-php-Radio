@@ -23,5 +23,5 @@ DEPLOYMENT STEPS -
 4. In the credentials tab, obtain the API key for the Data API.
 5. In the ‘APIKEY.php’ file, API key can be replaced.
 6. Database credentials can be changed in the ‘databaseconfig.php’ file.
-7. On running databaseconfig.php file it create the database and the required tables.
+7. On running databasecreate.php file it will create the database and the required tables.
 8. The landing page of the application will be ‘index.html’ file where the users will have to sign up or log in.
