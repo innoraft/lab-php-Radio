@@ -21,7 +21,7 @@ DEPLOYMENT STEPS -
 2. Create a project in the Google Developers Console and register  your application so that it can submit API requests.
 3. After creating a project, enable Youtube Data API.
 4. In the credentials tab, obtain the API key for the Data API.
-5. In the ‘searchandadd.php’ file, API key can be replaced in the url that is used to call the API.
+5. In the ‘APIKEY.php’ file, API key can be replaced.
 6. Database credentials can be changed in the ‘databaseconfig.php’ file.
 7. On running databaseconfig.php file it create the database and the required tables.
 8. The landing page of the application will be ‘index.html’ file where the users will have to sign up or log in.
