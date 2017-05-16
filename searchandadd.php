@@ -122,6 +122,8 @@ $_SESSION['max'] = $_GET['maxResults'];
 $max2 = $_SESSION['max'];
 // echo $_SESSION['max'];
 
+//Change API key here
+
     $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY";
 
     // echo $url;
