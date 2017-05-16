@@ -2,7 +2,7 @@
 
 body{
 
-    background: url(background.jpeg) no-repeat center center fixed;
+    background: url(Images/background.jpeg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -98,14 +98,14 @@ background-color: #bb0000;
 
 .banner {
 
-background: url(background.jpg);
+background: url(Images/background.jpg);
 background-size: 100% 100%;
 
 }
 
 .banner2 {
 
-background: url(background.jpg);
+background: url(Images/background.jpg);
 background-size: 100% 100%;
 
 }
@@ -138,7 +138,7 @@ font-size: 21px;
 
 .content {
 position: relative;
-background-image: url(search.jpeg);
+background-image: url(Images/search.jpeg);
 background-size: cover;
     padding-top: 98px;
     padding-bottom: 153px;
@@ -148,7 +148,7 @@ background-size: cover;
 
 .content2 {
     position: relative;
-    background-image: url(playlist.jpg);
+    background-image: url(Images/playlist.jpg);
 background-size: cover;
     padding-top: 98px;
     padding-bottom: 153px;
@@ -156,7 +156,7 @@ background-size: cover;
 
 .content3 {
     position: relative;
-background-image: url(show.jpg);
+background-image: url(Images/show.jpg);
 background-size: cover;
     padding-top: 98px;
     padding-bottom: 153px;
