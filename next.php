@@ -4,13 +4,15 @@
 
 session_start();
 
+include 'APIKEY.php';
+
 
 
 if (isset($_SESSION['nexttoken'])){
 	$next = $_SESSION['nexttoken'];
     $search = $_SESSION['search'];
     $max = $_SESSION['max'];
-	$url = "https://www.googleapis.com/youtube/v3/search?pageToken=" . $next . "&part=snippet&maxResults=". $max ."&order=relevance&q=". $search."&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY"; 
+	$url = "https://www.googleapis.com/youtube/v3/search?pageToken=" . $next . "&part=snippet&maxResults=". $max ."&order=relevance&q=". $search."&key=".$key.""; 
 
 	echo $url;
 
@@ -38,8 +40,9 @@ if (isset($_SESSION['nexttoken'])){
 // echo $next;
 
 // $_SESSION['token'] = "def";
+$server = $_SERVER['SERVER_NAME'];
 
-header('Location: http://radio.com/searchandadd.php');
+header('Location: http://'.$server.'/searchandadd.php');
 
 
 

@@ -15,15 +15,9 @@
 <br>
 
 <a href="welcome.php"><button class="button2">Go Back To Home</button></a>
+<a href="input.php"><button class="button2" name="Button">Search Again</button></a>
 <a href="showplaylist.php"><button class="button2">Go To Playlist</button></a>
 <a href="logout.php"><button class="button2" style="float: right;">Sign Out</button></a>
-<!-- <form action="welcome.php">
-	<input type="submit" value="GO BACK TO HOME" class = "button2" style="padding: 11px;">
-</form> -->
-
-<br>
-
-
 
 
 
@@ -88,22 +82,14 @@ $uid = $_SESSION['userID'];
 if (isset($uid)) {
 
 
-$inactive = 120; 
-ini_set('session.gc_maxlifetime', $inactive); 
-
-session_start();
-
-if (isset($_SESSION['testing']) && (time() - $_SESSION['testing'] > $inactive)) {
-    session_unset($_SESSION['search']);     
-}
-$_SESSION['testing'] = time(); 
-
 
 session_start();
 
 // echo $_SESSION['nexttoken'];
 echo "<br>";
 echo $_SESSION['prevtoken'];
+
+
 
 
 
@@ -122,9 +108,14 @@ $_SESSION['max'] = $_GET['maxResults'];
 $max2 = $_SESSION['max'];
 // echo $_SESSION['max'];
 
+// if (isset($_POST['Button'])) {
+//     echo "unset";
+//   unset($_SESSION['search']);
+// }
 //Change API key here
+include 'APIKEY.php';
 
-    $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=AIzaSyAtpy776qi2kfcupzrW0535NFLpRF5tVkY";
+    $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=".$key."";
 
     // echo $url;
 
@@ -154,6 +145,16 @@ $max2 = $_SESSION['max'];
 
 } 
 
+
+$inactive = 120; 
+ini_set('session.gc_maxlifetime', $inactive); 
+
+session_start();
+
+if (isset($_SESSION['testing']) && (time() - $_SESSION['testing'] > $inactive)) {
+    session_unset($_SESSION['search']);      
+}
+$_SESSION['testing'] = time(); 
 
 
 
@@ -205,10 +206,8 @@ else
 ?>
 
 <br>
-
-<form action="next.php">
-  <input type="submit" value="NEXT" class = "button2" style="padding: 11px;"> 
-</form>
+<!-- $server = $_SERVER['SERVER_NAME']; -->
+<a href="next.php"><button class="button2">NEXT</button></a>
 
 
 </body>
