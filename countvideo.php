@@ -52,8 +52,12 @@ else
 
 <?php
 
-
-$sql = mysql_query("SELECT * from counter where videoId = '$vid'");
+$tvideo = "SELECT * from counter where videoId = '$vid'";
+$sql = mysql_query($tvideo);
+if (!$sql) {
+	echo "Failed" .mysql_error();
+}
+else
 $sql_row = mysql_num_rows($sql);
 
 

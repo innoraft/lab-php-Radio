@@ -45,7 +45,12 @@ function validateEmailDomain($email, $domains) {
 }
 
 
-$sql3 = mysql_query("SELECT * from users where NAME = '".$UserName."'");
+$tname = "SELECT * from users where NAME = '".$UserName."'";
+$sql3 = mysql_query($tname);
+if (!$sql3) {
+  echo "Failed".mysql_error();
+}
+else
 $sql_row = mysql_num_rows($sql3);
 
 if ($sql_row> 0)
@@ -79,10 +84,10 @@ $_SESSION['userID'] = $userID;
     echo "<br /><a href='signupform.php'>Signup Again</a>";
   }
   else
-  
-
+  {
     echo "Successful";
     echo "<br /><a href='form.php'>Please Login Now</a>";
+  }
   }
 
   else

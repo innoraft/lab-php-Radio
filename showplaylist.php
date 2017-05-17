@@ -84,7 +84,7 @@ echo "<br>";
 
 echo "</table>";
 
-mysqli_close($con);
+
 }
 
 echo "<form action='logout.php'>

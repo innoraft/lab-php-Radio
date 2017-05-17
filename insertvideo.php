@@ -23,8 +23,12 @@ echo $uid;
 
 // $vid = print_r($_GET);
 echo $vid;
-
-$sql2 = mysql_query("SELECT * from video where videoId = '$vid' and userID = '$uid'");
+$tvideo = "SELECT * from video where videoId = '$vid' and userID = '$uid'";
+$sql2 = mysql_query($tvideo);
+if (!$sql2) {
+	echo "Failed".mysql_error();
+}
+else
 $sql_row = mysql_num_rows($sql2);
 
 if ($sql_row > 0)
