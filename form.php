@@ -12,27 +12,69 @@
 
 <script type="text/javascript" src = "script.js"></script>
 
+
+
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["email"].value;
+    if (x == "") {
+        alert("Email must be filled out");
+        return false;
+    }
+}
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+
 </head>
 <body>
 
-<!-- <div id="background-carousel">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="item active" style="background-image:url(background2.jpg)"></div> 
-      </div>
-    </div>
-</div> -->
+<a href="index.html"><button class="button2">Go Back</button></a>
+
 
 <div class = "background">
 <div class = "form">
-<form action = "login.php" method = "post">
-                  <label>Email     :</label><input type = "text" name = "email" class = "box"/><br /><br />
-                  <label>Password  :</label><input type = "password" name = "password"/><br/><br />
+<div id="output"></div>
+<form name = "myForm" id="myForm" action = "login.php" onsubmit= "return validateForm()" method = "post">
+                  <label>Email     :</label><input type = "text" name = "email" class = "box" id="email" /><br /><br />
+                  <label>Password  :</label><input type = "password" name = "password" id="password" required/><br/><br />
                   <input type = "submit" name="submit" value = " Submit " class = "button2"/><br />
 </form>
 </div>
 </div>
 
+    <script type='text/javascript'>
+    $( document ).ready(function() {
+    console.log( "working!" );
+    $("#myForm").submit(function(event) {
+      event.preventDefault();
+      var email = $('#email').val();
+      var password = $('#password').val();
+          url = "login.php?email=" +email+"&password=" +password;
+          $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: '',
+                    success: function(data) {
+                    	var result = $.trim(data);
+                        if (result == false) {
+                        	// window.location('/welcome.php','_self');
+                          var newWindow = window.open("","_self");
+                          newWindow.location.href = "/welcome.php";
+                         }
+                         else
+                         {
+                        $('#output').html(data);
+                    }
+                    }, 
+                   error: function (data) {
+                callbackfn("Error getting the data");
+            }
+    });
+
+        });
+  });
+</script>
   
  </body>
 </html> 

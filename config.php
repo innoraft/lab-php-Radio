@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="style.css"/>
-
-  <title></title>
-</head>
-<body>
-
-<div class = "background">
-<div class = "form">
-
-<?php
-// $conn = mysql_connect("localhost","root","123");
-// $db = mysql_select_db("userdb",$conn);
-
-?>
 
 
 
@@ -23,9 +6,9 @@
 include 'databaseconfig.php';
 
 
-  $UserName = $_POST['username'];
-  $password = md5($_POST['password']);
-  $email= $_POST['email'];
+  $UserName = $_GET['name'];
+  $password = md5($_GET['password']);
+  $email= $_GET['email'];
 
 
 $whitelist = array("innoraft.com");
@@ -45,7 +28,7 @@ function validateEmailDomain($email, $domains) {
 }
 
 
-$tname = "SELECT * from users where NAME = '".$UserName."'";
+$tname = "SELECT * from users where NAME = '".$UserName."' or EMAIL = '".$email."'";
 $sql3 = mysql_query($tname);
 if (!$sql3) {
   echo "Failed".mysql_error();
@@ -58,7 +41,7 @@ if ($sql_row> 0)
 
   echo "ALready Exists";
   echo "<br>";
-  echo "<a href = 'signupform.php'>Try Again</a>";
+  echo "<a href = 'form.php'>Please Login</a>";
 }
 
 else {
@@ -85,8 +68,7 @@ $_SESSION['userID'] = $userID;
   }
   else
   {
-    echo "Successful";
-    echo "<br /><a href='form.php'>Please Login Now</a>";
+
   }
   }
 
@@ -101,12 +83,6 @@ $_SESSION['userID'] = $userID;
 
 ?>
 
-</div>
-</div>
 
-
-
-</body>
-</html>
 
 
