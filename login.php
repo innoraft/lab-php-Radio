@@ -7,11 +7,17 @@ session_start();
   $password=md5($_GET['password']);
 $row=array();
 
-include 'databaseconfig.php';
 $result ="SELECT userID from users where EMAIL = '".$mail."'";
+$check = mysql_query($result);
+if (!$check) {
+echo "Failed" .mysql_error();
+}
+else {
+$sqlr = mysql_num_rows($check);
 $res=$db2->query($result);
+}
 
-if ($res > 0){
+if ($sqlr > 0){
   
 
 while($row = mysqli_fetch_array($res))
@@ -24,10 +30,16 @@ $_SESSION['userID'] = $row['userID'];
   //Getting the username
 
   $query = "SELECT NAME from users where EMAIL = '".$mail."' ";
-  $result = $link->query( $query );
+  $check2 = mysql_query($query);
+  if (!$check2) {
+echo "Failed".mysql_error();
+  }
+  else{
+  $result2 = $link->query( $query );
   $name = array();
+}
 // Print out rows
-while ( $row = $result->fetch_assoc() ) {
+while ( $row = mysqli_fetch_array($result2) ) {
   $name = ($row['NAME']);
 
 }
@@ -78,8 +90,9 @@ while ( $row = $result->fetch_assoc() ) {
        }
 
 
-$sql3 = mysql_query("SELECT Username from analytics where Username = '".$name."' and date = '".$date."' ");
-$sql_row3 = mysql_fetch_row($sql3);
+$sql3 = "SELECT Username from analytics where Username = '".$name."' and date = '".$date."' ";
+$run2 = mysql_query($sql3);
+$sql_row3 = mysql_num_rows($run2);
 
 if ($sql_row3 > 0) {
   // echo "abc";
@@ -93,6 +106,9 @@ $stamp =  date("G:i", strtotime($time));
 $sql4 = "INSERT into analytics (Username,date,time) values ('".$name."' , '".$date."' , '".$stamp."')";
 
 $query4 = mysql_query($sql4);
+if (!$query4) {
+echo "Failed" .mysql_error();
+}
 
 }
 
