@@ -18,7 +18,7 @@ if ( $link->connect_errno ) {
 $query = "
   SELECT *
   FROM counter
-  ORDER BY count DESC LIMIT 5";
+  ORDER BY count DESC LIMIT 10";
 $result = $link->query( $query );
 
 // All good?

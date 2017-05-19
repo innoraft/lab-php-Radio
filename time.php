@@ -26,7 +26,7 @@ if ( $link->connect_errno ) {
 }
 
 // Fetch the data
-$query = "SELECT time, COUNT(*) as c from analytics where time >= '".$from."' and time < '".$to."' and date = '".$date."' GROUP BY time"; 
+$query = "SELECT time, COUNT(*) as c from analytics where time >= '".$from."' and time < '".$to."' and date = '".$date."' GROUP BY time DESC LIMIT 10"; 
 $result = $link->query( $query );
 
 // All good?

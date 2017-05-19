@@ -6,7 +6,6 @@ mysql_query("CREATE database userdb");
 
 mysql_query("use userdb");
 
-
 //Creating the tables
 
 mysql_query("CREATE TABLE IF NOT EXISTS `analytics` (

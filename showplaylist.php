@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css"/>
+<link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 	<title>Playlist</title>
               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -84,7 +84,7 @@ echo "<br>";
 
 echo "</table>";
 
-
+mysqli_close($con);
 }
 
 echo "<form action='logout.php'>

@@ -15,7 +15,7 @@ if (isset($uid)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<link rel="stylesheet" type="text/css" href="style2.css"/>
+<link rel="stylesheet" type="text/css" href="CSS/style2.css"/>
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -37,13 +37,20 @@ if (isset($uid)) {
 <div class = "nav">
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
-<a href = "#" class = "left"><img src="logo.png"></a>
+<a href = "#" class = "left"><img src="Images/logo.png"></a>
 </div>
 
 <div class = "banner">
 <p class = "tag">WELCOME TO INNORAFT RADIO</p>
 <p class = "tag2">Where words leave off, music begins</p>
 
+</div>
+
+<div class="arrow-container animated fadeInDown">
+  <div class="arrow-2">
+    <i class="fa fa-angle-down"></i>
+  </div>
+  <div class="arrow-1 animated hinge infinite zoomIn"></div>
 </div>
 
 <div class = "container-fluid bg-3 text-center boot">
@@ -90,7 +97,7 @@ SIGN OUT</button></a></button>
 <div class = "wrapper">
 
 <div class = "col-md-6">
-<img src="logo.png">
+<img src="Images/logo.png">
 </div>
 <div class = "col-md-6">
 <p>Official Website</p>

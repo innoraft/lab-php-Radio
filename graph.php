@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 
 	<!-- Styles -->
@@ -68,7 +68,7 @@ var chart = AmCharts.makeChart( "chartdiv", {
 </head>
 <body>
 <a href="chart.php"><button class="button2">Change Inputs</button></a>
-<a href="onlineusers.php"><button class="button2">Show Users</button></a>
+<a href="graph.php"><button class="button2">Show Users</button></a>
 <a href="logout.php"><button class="button2" style="float: right;">Sign Out</button></a>
 
 <!-- HTML -->
