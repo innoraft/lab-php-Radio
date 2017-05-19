@@ -1,8 +1,8 @@
 <?php
-$conn = mysql_connect("localhost","root","Enter you password");
+$conn = mysql_connect("localhost","root","Enter your password");
 $db = mysql_select_db("database_name",$conn);
-$db2=mysqli_connect("localhost","root","Enter you password","database_name");
-$link = new mysqli( 'localhost', 'root', 'Enter you password', 'database_name' );
+$db2=mysqli_connect("localhost","root","Enter your password","database_name");
+$link = new mysqli( 'localhost', 'root', 'Enter your password', 'database_name' );
 $client_id = "REPLACE_ME";
 $client_secret = "REPLACE_ME";
 ?>
