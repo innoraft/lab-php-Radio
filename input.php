@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <title>
-    
+    SEARCH
   </title>
 </head>
 <body>
 
-<form action="welcome.php">
-  <input type="submit" value="GO BACK TO HOME" class = "button2" style="padding: 11px;">
-</form>
+<div class = "nav">
+<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
+SIGN OUT</button></a></button>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="input.php" class="a"><button class="button">SEARCH</button></a>
+<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
+<a href="welcome.php" class="a"><button class="button">HOME</button></a>
+<a href = "#" class = "left"><img src="Images/logo.png"></a>
+</div>
 
 <?php
 
@@ -22,20 +32,8 @@ $uid = $_SESSION['userID'];
 
 if (isset($uid)) {
  
-echo "<form action='logout.php'>
-<input type='submit' value='Sign Out' style='background-color: #bb0000;
-                            color: #fff;
-                            font-family: Sans-serif;
-                            text-align: center;
-                            border: 0;
-                            transition: all 0.3s ease 0s;
-                            font-size: 20px;
-                            padding: 11px;
-                            float:right;'>
-</form>";
 
-
-echo '
+?>
 <html>
 <head>
 
@@ -78,9 +76,7 @@ echo '
  </body>
 </html> 
 
-  ';
-
-
+<?php
 }
 
 else

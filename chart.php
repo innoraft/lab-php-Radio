@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Analytics</title>
+      <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 <!-- Styles -->
 <style>
@@ -179,8 +180,15 @@ var chart = AmCharts.makeChart( "chartdiv3", {
 </script>
 
 <!-- HTML -->
-<a href="welcome.php"><button class="button2">Go Back To Home Page</button></a>
-<a href="logout.php"><button class="button2" style="float: right;">Sign Out</button></a>
+<div class = "navbar">
+<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
+SIGN OUT</button></a></button>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="input.php" class="a"><button class="button">SEARCH</button></a>
+<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
+<a href="welcome.php" class="a"><button class="button">HOME</button></a>
+<a href = "#" class = "left"><img src="Images/logo.png"></a>
+</div>
 
 <h2>Most Popular Song</h2>
 <div id="chartdiv"></div>

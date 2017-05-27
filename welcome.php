@@ -37,6 +37,10 @@ if (isset($uid)) {
 <div class = "nav">
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="input.php" class="a"><button class="button">SEARCH</button></a>
+<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
+<a href="welcome.php" class="a"><button class="button">HOME</button></a>
 <a href = "#" class = "left"><img src="Images/logo.png"></a>
 </div>
 
@@ -46,12 +50,7 @@ SIGN OUT</button></a></button>
 
 </div>
 
-<div class="arrow-container animated fadeInDown">
-  <div class="arrow-2">
-    <i class="fa fa-angle-down"></i>
-  </div>
-  <div class="arrow-1 animated hinge infinite zoomIn"></div>
-</div>
+<div class="bounce"><i class="fa fa-angle-double-down" style="font-size: 49px;" id="faa"></i></div>
 
 <div class = "container-fluid bg-3 text-center boot">
 <div class = "row">
@@ -59,17 +58,28 @@ SIGN OUT</button></a></button>
 <h2 class = "heading">SEARCH,CREATE & ANALIZE</h2>
 
 <div class = "col-md-4 name">
+
 <div class= "content">
+  <div class='description'>
+    <!-- description content -->
+    <p class='description_content'>Search</p>
+    <!-- end description content -->
+  </div>
 <div class= "overlay">
-  <div class = "text"><a href="input.php" class = "a">SEARCH</a></div>
+  <div class = "text"><a href="input.php" class = "a" style="font-size: 30px;"><span class="glyphicon glyphicon-search"></span>SEARCH</a></div>
 </div>
    </div>
 </div>
 
 <div class = "col-md-4 name">
 <div class = "content2">
+  <div class='description'>
+    <!-- description content -->
+    <p class='description_content'>Show Analytics</p>
+    <!-- end description content -->
+  </div>
 <div class="overlay"> 
-  <div class = "text"><a href="chart.php" class = "a">SHOW ANALYTICS</a></div>
+  <div class = "text"><a href="chart.php" class = "a" style="font-size: 30px;"><span class="glyphicon glyphicon-stats"></span>SHOW ANALYTICS</a></div>
   </div>
 </div>
   
@@ -77,8 +87,14 @@ SIGN OUT</button></a></button>
 
 <div class = "col-md-4 name">
 <div class = "content3">
+  <div class='description'>
+    <!-- description content -->
+    <p class='description_content'>Show Playlist</p>
+    <!-- end description content -->
+  </div>
+<div class= "overlay">
 <div class="overlay">
-  <div class = "text"><a href = "showplaylist.php" class = "a">SHOW PLAYLIST</a></div>
+  <div class = "text"><a href = "showplaylist.php" class = "a" style="font-size: 30px;"><span class="glyphicon glyphicon-play-circle"></span>SHOW PLAYLIST</a></div>
   </div>
 </div>
   
@@ -86,8 +102,9 @@ SIGN OUT</button></a></button>
 
 </div>
 </div>
+</div>
 
-<div class = "footer">
+<!-- <div class = "footer">
 <div class = "overlay2"></div>
 <div class = "container-fluid bg-3 text-center boot">
 <div class = "row">
@@ -118,13 +135,13 @@ SIGN OUT</button></a></button>
                       <li><a href="https://github.com/innoraft" target="_blank" class = "margin"><i class="fa fa-github-square fa-2x"></i></a></li>
 
 </ul>
-</div>
-
-</div>
-</div>
-</div>
 
 
+</div>
+</div>
+</div>
+
+ -->
 
 
 

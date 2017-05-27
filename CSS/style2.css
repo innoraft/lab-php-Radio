@@ -130,7 +130,7 @@ font-size: 21px;
 
 }
 .row {
-/*background-color: #bb0000;*/
+margin-bottom: 174px;
 
 }
 
@@ -196,12 +196,35 @@ text-decoration: none;
 color: white;
 }
 
+.name{
+  float:left; /* important */
+  position:relative; /* important(so we can absolutely position the description div */
+}
+
 .name:hover .overlay {
   bottom: 0;
   height: 100%;
   opacity: 0.5;
 
 }
+
+div.description{
+  position:absolute; /* absolute position (so we can position it where we want)*/
+  bottom:0px; /* position will be on bottom */
+  left:0px;
+  width:100%;
+  /* styling bellow */
+  background-color:black;
+  color:white;
+  opacity:0.6; /* transparency */
+  filter:alpha(opacity=60); /* IE transparency */
+}
+p.description_content{
+  padding:10px;
+  margin:0px;
+  font-size: 30px;
+}
+
 .form{
     position: relative;
     z-index: 2;
@@ -218,7 +241,6 @@ color: white;
 .boot {
 
 margin-top: 81px;
-
 }
 
 .heading {
@@ -327,97 +349,60 @@ float :  left;
 
 }
 
-.arrow-container{
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 25px;
-  left: 0;
-  right: 0;
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+ 
+#faa {
+ width: 60px;
+ display: block;
+ text-align: center;
+ color:#ffffff;
+ font:49px 45px 'FontAwesome';
+ line-height:60px;
+ text-rendering: auto;
+ -webkit-font-smoothing: antialiased;
 }
-
-.arrow-1{
-  width: 100px;
-  height: 100px;
-  background: #bb0000;
-  opacity: 0.5;
-  border-radius: 50%;
-  position: absolute;
+.fa-angle-double-down:before {content: "\f103";}
+ 
+.bounce {
+ position: absolute;
+ bottom: 30px;
+ left: 50% ;
+ width: 60px;
+ height: 60px ;
+ margin-left:-30px;
+ border: 2px solid #ffffff;
+ -webkit-border-radius:50%;
+ -moz-border-radius:50%;
+ -ms-border-radius:50%;
+ border-radius:50%;
+ animation: bounce 2s infinite;
+ -webkit-animation: bounce 2s infinite;
+ -moz-animation: bounce 2s infinite;
+ -o-animation: bounce 2s infinite;
 }
-
-.arrow-2{
-  width: 60px;
-  height: 60px;
-  background: #bb0000;
-  border-radius: 50%;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1;
-  display: table;
+ 
+@-webkit-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+ 40% {-webkit-transform: translateY(-30px);}
+ 60% {-webkit-transform: translateY(-15px);}
 }
-
-.arrow-2:before{
-  width: 52px;
-  height: 52px;
-  content: "";
-  border: 2px solid #006064;
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
+ 
+@-moz-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+ 40% {-moz-transform: translateY(-30px);}
+ 60% {-moz-transform: translateY(-15px);}
 }
-
-.arrow-2 i.fa{
-  font-size: 30px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  color: #006064;
+ 
+@-o-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+ 40% {-o-transform: translateY(-30px);}
+ 60% {-o-transform: translateY(-15px);}
 }
-
-/* Custom Animate.css */
-
-.animated.hinge {
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
+@keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+ 40% {transform: translateY(-30px);}
+ 60% {transform: translateY(-15px);}
 }
-
-@-webkit-keyframes zoomIn {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale3d(.4, .4, .4);
-            transform: scale3d(.4, .4, .4);
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-  
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes zoomIn {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale3d(.4, .4, .4);
-            transform: scale3d(.4, .4, .4);
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-  
-  100% {
-    opacity: 0;
-  }
-}
-
-.zoomIn {
-  -webkit-animation-name: zoomIn;
-          animation-name: zoomIn;
-}
-
+ 
+ 

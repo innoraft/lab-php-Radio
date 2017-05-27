@@ -2,26 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<!-- <script src="update2.js"></script> -->
+	<title>Search Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    
-</head>
-<body>
-
-
-<br>
-
-<a href="welcome.php"><button class="button2">Go Back To Home</button></a>
-<a href="input.php"><button class="button2" name="Button">Search Again</button></a>
-<a href="showplaylist.php"><button class="button2">Go To Playlist</button></a>
-<a href="logout.php"><button class="button2" style="float: right;">Sign Out</button></a>
-
-
-
-    <script type="text/javascript">
+        <script type="text/javascript">
 $( document ).ready(function() {
     console.log( "ready!" );
     $("#demo > button").on("click", function(event) {
@@ -37,7 +25,7 @@ $( document ).ready(function() {
                     //id : $("#" . $id).val(),
                     success: function(data) {
                         // document.getElementById("demo").innerHTML = "ADDED! ";
-                    },	
+                    },  
                 });
             });
        
@@ -68,9 +56,9 @@ $( document ).ready(function() {
        
 });     
         </script>
+</head>
 
-
-
+<body>
 
 
 <?php
@@ -106,12 +94,7 @@ $search2 = $_SESSION['search'];
 echo "<br>";
 $_SESSION['max'] = $_GET['maxResults'];
 $max2 = $_SESSION['max'];
-// echo $_SESSION['max'];
 
-// if (isset($_POST['Button'])) {
-//     echo "unset";
-//   unset($_SESSION['search']);
-// }
 //Change API key here
 include 'APIKEY.php';
 
@@ -146,17 +129,32 @@ include 'APIKEY.php';
 } 
 
 
-$inactive = 120; 
-ini_set('session.gc_maxlifetime', $inactive); 
+// $inactive = 120; 
+// ini_set('session.gc_maxlifetime', $inactive); 
 
-session_start();
+// session_start();
 
-if (isset($_SESSION['testing']) && (time() - $_SESSION['testing'] > $inactive)) {
-    session_unset($_SESSION['search']);      
-}
-$_SESSION['testing'] = time(); 
+// if (isset($_SESSION['testing']) && (time() - $_SESSION['testing'] > $inactive)) {
+//     session_unset($_SESSION['search']);      
+// }
+// $_SESSION['testing'] = time(); 
 
+?>
 
+<div class = "navbar">
+<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
+SIGN OUT</button></a></button>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="input.php" class="a"><button class="button">SEARCH</button></a>
+<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
+<a href="welcome.php" class="a"><button class="button">HOME</button></a>
+<a href = "#" class = "left"><img src="Images/logo.png"></a>
+</div>
+<div class="container">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<div class="formsearch">
+<?php
 
     foreach ($_SESSION['songlist']['items'] as $key => $value1) {
 
@@ -165,6 +163,7 @@ $_SESSION['testing'] = time();
 
 
         ?>
+
 
            <h4 class="title"> <?php echo $name; ?></h4>
            <?php 
@@ -195,6 +194,19 @@ $_SESSION['testing'] = time();
 }
 
 
+
+?>
+<br>
+<a href="next.php"><button class="button2">NEXT</button></a>
+
+</div>
+</div>
+<div class="col-md-1"></div>
+</div>
+
+<?php
+
+
 }
 
 else
@@ -204,11 +216,6 @@ else
 
 
 ?>
-
-<br>
-<!-- $server = $_SERVER['SERVER_NAME']; -->
-<a href="next.php"><button class="button2">NEXT</button></a>
-
 
 </body>
 </html>

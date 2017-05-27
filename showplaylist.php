@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 	<title>Playlist</title>
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 
        <script type="text/javascript">
@@ -33,12 +33,17 @@
 
 </head>
 <body>
-
-<form action="welcome.php">
-	<input type="submit" value="GO BACK TO HOME" class = "button2" style="padding: 11px;">
-</form>
-
-<h1>YOUR PLAYLIST</h1>
+<div class = "navbar">
+<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
+SIGN OUT</button></a></button>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="input.php" class="a"><button class="button">SEARCH</button></a>
+<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
+<a href="welcome.php" class="a"><button class="button">HOME</button></a>
+<a href = "#" class = "left"><img src="Images/logo.png"></a>
+</div>
+<div class="formsearch">
+<h1 style="text-align: center;">YOUR PLAYLIST</h1>
 
 <?php
 include 'databaseconfig.php';
@@ -62,10 +67,7 @@ if ($res > 0){
 
 while($row = mysqli_fetch_array($res))
 {
-// echo "<tr>";
-// echo "<td>" . $row['videoID'] . "</td>";
-// echo "<td>" . $row['playlistID'] . "</td>";
-// echo "</tr>";
+
 $id = $row['videoId'];
 
 // echo $row['videoId'];
@@ -86,18 +88,6 @@ echo "</table>";
 
 mysqli_close($con);
 }
-
-echo "<form action='logout.php'>
-<input type='submit' value='Sign Out' style='background-color: #bb0000;
-                            color: #fff;
-                            font-family: Sans-serif;
-                            text-align: center;
-                            border: 0;
-                            transition: all 0.3s ease 0s;
-                            font-size: 20px;
-                            padding: 11px;
-                            float:right;'>
-</form>";
 }
 else
 {
@@ -107,6 +97,7 @@ echo "<a href='form.php'>Login To Continue</a>";
 
 
 ?>
+</div>
 
 </body>
 </html>
