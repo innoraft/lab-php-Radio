@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Search Results</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type="text/javascript">
 $( document ).ready(function() {
     console.log( "ready!" );
@@ -119,10 +119,7 @@ include 'APIKEY.php';
     // $_SESSION['prevtoken']= $abc['prevPageToken'];
     $_SESSION['nexttoken'] = $abc['nextPageToken'];
     $xyz = $_SESSION['nexttoken'];
-    // echo $xyz;
 
-    // echo $_SESSION['prevtoken'];
-    // echo "abc";
 
     
 
@@ -160,21 +157,19 @@ SIGN OUT</button></a></button>
 
         $name = $value1['snippet']['title'];
         $title = rawurlencode($name);
-
-
+        $thumbnail = $value1['snippet']['thumbnails']['medium']['url'];
         ?>
-
-
-           <h4 class="title"> <?php echo $name; ?></h4>
-           <?php 
-            echo "<br>";
+                   <h4 class="title"> <?php echo $name; ?></h4>
+      <?php
+        echo "<br>";
+        echo '<img src="'.$thumbnail.'" alt="thumbnail">';
             $id = $value1['id']['videoId'];
 
             session_start();
             $_SESSION['id'] = $id;
 
-            echo "<br>";
-        echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
+        //     echo "<br>";
+        // echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
 
                     echo "<form id='demo' method='POST' action=''> 
                     <button type='button' 
