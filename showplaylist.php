@@ -30,8 +30,7 @@ function value()
                     data: '',
                     //id : $("#" . $id).val(),
                     success: function(data) {
-                        // $("#chatbox").append(data+"<br/>");
-                        alert ('Removed');
+                        window.location.reload();
                     },      
                 });
             });
@@ -116,7 +115,7 @@ while($row = mysqli_fetch_array($res))
 $id = $row['videoId'];
 
 $selecttitle = "SELECT title from counter where videoId = '$id'";
-$res2=mysql_query($selecttitle);
+$res2 = mysql_query($selecttitle);
 
 if($res2 === FALSE) { 
       echo "Failed".msql_error();
@@ -151,8 +150,6 @@ if ($res2 > 0) {
                       <a href="#" class="js-modal-close" onclick="value('clear')">Close</a>
                       </footer>
                       </div>
-
-
               <?php
 
 

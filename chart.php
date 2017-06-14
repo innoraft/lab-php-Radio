@@ -42,7 +42,7 @@
 </style>
 
 <!-- Resources -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
@@ -118,7 +118,7 @@ var chart = AmCharts.makeChart( "chartdiv2", {
     "fillAlphas": 0.8,
     "lineAlpha": 0.2,
     "type": "column",
-    "valueField": "c"
+    "valueField": "diff"
   } ],
   "chartCursor": {
     "categoryBalloonEnabled": false,
@@ -190,7 +190,7 @@ SIGN OUT</button></a></button>
 <a href = "#" class = "left"><img src="Images/logo.png"></a>
 </div>
 
-<h2>Most Popular Song</h2>
+<h2 style="margin-top: 94px;">Most Popular Song</h2>
 <div id="chartdiv"></div>
 <h2>Most Active User</h2>
 <div id ="chartdiv2"></div>

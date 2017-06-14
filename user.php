@@ -1,13 +1,5 @@
 
 <?php
-// session_start();
-// $uid = $_SESSION['userID'];
-// // echo $uid;
-// if (isset($uid))
-// {
-  
-// Connect to MySQL
-// $link = new mysqli( 'localhost', 'root', '123', 'userdb' );
 include 'databaseconfig.php';
 
 if ( $link->connect_errno ) {
@@ -15,8 +7,7 @@ if ( $link->connect_errno ) {
 }
 
 // Fetch the data
-$query = "
-SELECT Username, count(*) as c FROM datedb GROUP BY Username ORDER BY c DESC LIMIT 5;"; 
+$query = "SELECT Username,diff from analytics ORDER BY diff DESC LIMIT 5"; 
 $result = $link->query( $query );
 
 // All good?
