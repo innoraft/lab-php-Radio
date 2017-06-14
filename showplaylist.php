@@ -5,6 +5,14 @@
 
 	<title>Playlist</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+function value()
+{
+    $('#player').empty();
+}
+</script>
 
 
        <script type="text/javascript">
@@ -31,6 +39,42 @@
 });     
         </script>
 
+        <script>
+  $(function(){
+    console.log("fetchid!");
+      var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+      $('button[data-modal-id]').click(function(e) {
+      var myvideoId = $(this).data('id');
+      // $("#videoId").text( myvideoId);
+          var iframe = document.createElement("iframe");
+        iframe.setAttribute("src",
+          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+            iframe.style.width = "640px";
+        iframe.style.height = "480px";
+      $("#player").append(iframe);
+      e.preventDefault();
+      // $("body").append(appendthis);
+      $(".modal-overlay").fadeTo(500, 0.7);
+
+      var modalBox = $(this).attr('data-modal-id');
+      $('#'+modalBox).fadeIn($(this).data());
+      }); 
+      $(".js-modal-close, .modal-overlay").click(function() {
+      $(".modal-box, .modal-overlay").fadeOut(500, function() {
+      $(".modal-overlay").remove();
+      });
+      });
+      // clear();
+      $(window).resize(function() {
+      $(".modal-box").css({
+      top: ($(window).height() - $(".modal-box").outerHeight()) / 50,
+      left: ($(window).width() - $(".modal-box").outerWidth()) /14
+      });
+      });
+      $(window).resize();
+    });
+</script>
+
 </head>
 <body>
 <div class = "navbar">
@@ -54,6 +98,7 @@ $uid = $_SESSION['userID'];
 if (isset($uid))
 {
 $row=array();
+$arr = array();
 // $db=mysqli_connect("localhost","root","123","userdb");
 $result ="SELECT videoId FROM video where userID = '$uid'";
 
@@ -70,21 +115,49 @@ while($row = mysqli_fetch_array($res))
 
 $id = $row['videoId'];
 
-// echo $row['videoId'];
-echo "<br>";
+$selecttitle = "SELECT title from counter where videoId = '$id'";
+$res2=mysql_query($selecttitle);
 
-		echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
+if($res2 === FALSE) { 
+      echo "Failed".msql_error();
+}
+else{
+
+if ($res2 > 0) {
+  while ($arr = mysql_fetch_array($res2)) {
+    $title = $arr['title'];
+    echo "<br>";
+    ?>
+    <h4 class="title"> <?php echo $title; ?></h4>
+    <?php
+  }
+}
+}
               ?>
               <form id = "remove" method="POST" >
               <button type="button" id="<?php echo $id;?>" name="button" class="button2" method = "POST">Remove From Playlist</button>
               </form>
+              <br>
+              <button class="js-open-modal2 button2" data-id="<?php echo $id;?>" href="#" data-modal-id="popup">Show Video</button>
+              <br>
+                      <div id="popup" class="modal-box" role = "dialog"> 
+                      <header>
+                      <a href="#" class="js-modal-close close" onclick="value('clear')">CLOSE</a>
+                      </header>
+                      <div class="modal-body">
+                      <div id="player"></div>
+                      </div>
+                      <footer>
+                      <a href="#" class="js-modal-close" onclick="value('clear')">Close</a>
+                      </footer>
+                      </div>
+
 
               <?php
 
 
 }
 
-echo "</table>";
 
 mysqli_close($con);
 }

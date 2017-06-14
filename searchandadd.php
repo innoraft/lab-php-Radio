@@ -3,9 +3,14 @@
 <html>
 <head>
     <title>Search Results</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -56,6 +61,51 @@ $( document ).ready(function() {
        
 });     
         </script>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+function value()
+{
+    $('#player').empty();
+}
+</script>
+<script>
+  $(function(){
+    console.log("fetchid!");
+      var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+      $('button[data-modal-id]').click(function(e) {
+      var myvideoId = $(this).data('id');
+      // $("#videoId").text( myvideoId);
+          var iframe = document.createElement("iframe");
+        iframe.setAttribute("src",
+          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+            iframe.style.width = "640px";
+        iframe.style.height = "480px";
+      $("#player").append(iframe);
+      e.preventDefault();
+      // $("body").append(appendthis);
+      $(".modal-overlay").fadeTo(500, 0.7);
+
+      var modalBox = $(this).attr('data-modal-id');
+      $('#'+modalBox).fadeIn($(this).data());
+      }); 
+      $(".js-modal-close, .modal-overlay").click(function() {
+      $(".modal-box, .modal-overlay").fadeOut(500, function() {
+      $(".modal-overlay").remove();
+      });
+      });
+      // clear();
+      $(window).resize(function() {
+      $(".modal-box").css({
+      top: ($(window).height() - $(".modal-box").outerHeight()) / 50,
+      left: ($(window).width() - $(".modal-box").outerWidth()) /14
+      });
+      });
+      $(window).resize();
+    });
+</script>
+
 </head>
 
 <body>
@@ -167,10 +217,6 @@ SIGN OUT</button></a></button>
 
             session_start();
             $_SESSION['id'] = $id;
-
-        //     echo "<br>";
-        // echo "<iframe src='//www.youtube.com/embed/$id?enablejsapi=1' frameborder='0' allowfullscreen id='video'></iframe>";echo "<br>";
-
                     echo "<form id='demo' method='POST' action=''> 
                     <button type='button' 
                             name='button' 
@@ -181,9 +227,14 @@ SIGN OUT</button></a></button>
                             text-align: center;
                             border: 0;
                             transition: all 0.3s ease 0s;
-                            padding:11px;'
+                            padding:7px;'
                             >Add to playlist</button>
                     </form>";
+
+?>
+            <br>
+            <button class="js-open-modal2 button2" data-id="<?php echo $id;?>" href="#" data-modal-id="popup">Show Video</button>
+<?php
 
 
 }
@@ -191,6 +242,8 @@ SIGN OUT</button></a></button>
 
 
 ?>
+
+  
 <br>
 <a href="next.php"><button class="button2">NEXT</button></a>
 
@@ -199,8 +252,22 @@ SIGN OUT</button></a></button>
 <div class="col-md-1"></div>
 </div>
 
-<?php
+                      <div id="popup" class="modal-box" role = "dialog"> 
+                      <header>
+                      <a href="#" class="js-modal-close close" onclick="value('clear')">CLOSE</a>
+                      </header>
+                      <div class="modal-body">
+                      <div id="player"></div>
+                      </div>
+                      <footer>
+                      <a href="#" class="js-modal-close" onclick="value('clear')">Close</a>
+                      </footer>
+                      </div>
 
+
+
+
+<?php
 
 }
 
