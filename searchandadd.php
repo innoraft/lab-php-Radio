@@ -2,67 +2,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Search Results</title>
-    <meta charset="utf-8">
+  <title>Search Results</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
-    <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
+  <script src="sweetalert-master/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
+  <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script type="text/javascript">
-$( document ).ready(function() {
-    console.log( "ready!" );
-    $("#demo > button").on("click", function(event) {
-                console.log(this.id);
-                var id = this.id;
-                var url = "insertvideo.php?id=" + id;
-          console.log(url);
-                event.preventDefault();
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: '',
-                    //id : $("#" . $id).val(),
-                    success: function(data) {
-                        // document.getElementById("demo").innerHTML = "ADDED! ";
-                    },  
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        $("#demo > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var url = "insertvideo.php?id=" + id;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
+                            // document.getElementById("demo").innerHTML = "ADDED! ";
+                        },  
+                    });
                 });
-            });
        
 });     
-        </script>
+</script>
 
 
-            <script type="text/javascript">
-$( document ).ready(function() {
-    console.log( "count" );
-    $("#demo > button").on("click", function(event) {
-                console.log(this.id);
-                var id = this.id;
-                var title = $(this).attr('class');
-                console.log(title);
-                var url = "countvideo.php?id=" +id+"&title=" +title;
-          console.log(url);
-                event.preventDefault();
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: '',
-                    success: function(data) {
-                        alert('Added!');
-                    },  
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "count" );
+        $("#demo > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var title = $(this).attr('class');
+                    console.log(title);
+                    var url = "countvideo.php?id=" +id+"&title=" +title;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
+                          swal("Added!", "Check Playlist", "success")
+                        },  
+                    });
                 });
-            });
-       
-});     
-        </script>
+           });     
+    </script>
 
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script type="text/javascript">
 function value()
@@ -76,15 +73,13 @@ function value()
       var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
       $('button[data-modal-id]').click(function(e) {
       var myvideoId = $(this).data('id');
-      // $("#videoId").text( myvideoId);
-          var iframe = document.createElement("iframe");
-        iframe.setAttribute("src",
+      var iframe = document.createElement("iframe");
+      iframe.setAttribute("src",
           "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
             iframe.style.width = "640px";
         iframe.style.height = "480px";
       $("#player").append(iframe);
       e.preventDefault();
-      // $("body").append(appendthis);
       $(".modal-overlay").fadeTo(500, 0.7);
 
       var modalBox = $(this).attr('data-modal-id');
@@ -95,7 +90,6 @@ function value()
       $(".modal-overlay").remove();
       });
       });
-      // clear();
       $(window).resize(function() {
       $(".modal-box").css({
       top: ($(window).height() - $(".modal-box").outerHeight()) / 50,
@@ -115,42 +109,22 @@ function value()
 session_start();
 
 $uid = $_SESSION['userID'];
-// echo $uid;
-
 if (isset($uid)) {
+    //Change API key in this file
+    include 'APIKEY.php';
+    $search = $_GET["q"];
+    $_SESSION['search'] = rawurlencode($search);
+    $search2 = $_SESSION['search'];
+    $_SESSION['max'] = $_GET['maxResults'];
+    $max2 = $_SESSION['max'];
+    $prev = $_SESSION['prevtoken'];
 
-
-
-session_start();
-
-// echo $_SESSION['nexttoken'];
-echo "<br>";
-echo $_SESSION['prevtoken'];
-
-
-
-
-
-
-
+  //For Next page
 if (!isset($_SESSION['nexttoken']))
 
 {
-    $search = $_GET["q"];
-
-    $_SESSION['search'] = rawurlencode($search);
-$search2 = $_SESSION['search'];
-// echo $_SESSION['search'];
-echo "<br>";
-$_SESSION['max'] = $_GET['maxResults'];
-$max2 = $_SESSION['max'];
-
-//Change API key here
-include 'APIKEY.php';
 
     $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=".$key."";
-
-    // echo $url;
 
     $ch = curl_init();  
 
@@ -164,17 +138,9 @@ include 'APIKEY.php';
     $output = curl_exec($ch);
     $abc = json_decode($output, true);
     $_SESSION['songlist'] = $abc;
-    // $token = $abc['nextPageToken'];
-    $results = $abc['pageInfo']['totalResults'];
-    // $_SESSION['prevtoken']= $abc['prevPageToken'];
     $_SESSION['nexttoken'] = $abc['nextPageToken'];
     $xyz = $_SESSION['nexttoken'];
-
-
-    
-
-} 
-
+}
 
 // $inactive = 120; 
 // ini_set('session.gc_maxlifetime', $inactive); 
@@ -191,7 +157,7 @@ include 'APIKEY.php';
 <div class = "navbar">
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
-<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<button class="button"><a href="chart.php" class="a">ANALYTICS</a></button>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
 <a href="welcome.php" class="a"><button class="button">HOME</button></a>
@@ -233,7 +199,8 @@ SIGN OUT</button></a></button>
 
 ?>
             <br>
-            <button class="js-open-modal2 button2" data-id="<?php echo $id;?>" href="#" data-modal-id="popup">Show Video</button>
+            <button class="js-open-modal2 button2" data-id=<?php echo $id;?> href="#" data-modal-id="popup">Show Video</button>
+            <br>
 <?php
 
 
@@ -245,7 +212,8 @@ SIGN OUT</button></a></button>
 
   
 <br>
-<a href="next.php"><button class="button2">NEXT</button></a>
+<a href="prev.php"><button class="button2">PREVIOUS</button></a>
+<a href="next.php"><button class="button2" style="float: right;">NEXT</button></a>
 
 </div>
 </div>

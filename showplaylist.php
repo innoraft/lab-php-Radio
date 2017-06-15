@@ -4,8 +4,11 @@
 <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 	<title>Playlist</title>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script src="sweetalert-master/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
 
 <script type="text/javascript">
 function value()
@@ -30,7 +33,19 @@ function value()
                     data: '',
                     //id : $("#" . $id).val(),
                     success: function(data) {
+                        swal({
+                          title: "Are you sure?",
+                          text: "This song will be deleted!!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Yes, delete it!",
+                          closeOnConfirm: false
+                        },
+                        function(){
+                          swal("Deleted!", "Song has been removed from playlist", "success");
                         window.location.reload();
+                        });
                     },      
                 });
             });
