@@ -1,14 +1,43 @@
+<?php
+include 'databaseconfig.php';
+
+session_start();
+$uid = $_SESSION['userID'];
+// echo $uid;
+if (isset($uid))
+{
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
-	<title>Playlist</title>
+  <title>Playlist</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
    <script src="sweetalert-master/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
+
+<link rel="stylesheet" href="CSS/WOW-master/css/libs/animate.css">
+
+ <script type="text/javascript" src="CSS/WOW-master/dist/wow.min.js"></script>
+
+<script>
+  wow = new WOW(
+  {
+  boxClass:     'wow', 
+animateClass: 'animated',
+offset:       100
+}
+);
+wow.init();
+</script>
+ 
+<script src="js/wow.min.js"></script>
+              <script>
+              new WOW().init();
+              </script>
 
 <script type="text/javascript">
 function value()
@@ -95,22 +124,16 @@ function value()
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
 <a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
 <a href="welcome.php" class="a"><button class="button">HOME</button></a>
 <a href = "#" class = "left"><img src="Images/logo.png"></a>
 </div>
 <div class="formsearch">
-<h1 style="text-align: center;">YOUR PLAYLIST</h1>
-
+<h1 style="text-align: center;" class="wow bounceInDown">YOUR PLAYLIST</h1>
 <?php
-include 'databaseconfig.php';
 
-session_start();
-$uid = $_SESSION['userID'];
-// echo $uid;
-if (isset($uid))
-{
 $row=array();
 $arr = array();
 // $db=mysqli_connect("localhost","root","123","userdb");
@@ -140,9 +163,10 @@ else{
 if ($res2 > 0) {
   while ($arr = mysql_fetch_array($res2)) {
     $title = $arr['title'];
+
     echo "<br>";
     ?>
-    <h4 class="title"> <?php echo $title; ?></h4>
+    <h4 class="title wow fadeInDown"> <?php echo $title; ?></h4>
     <?php
   }
 }
@@ -175,8 +199,9 @@ mysqli_close($con);
 }
 }
 else
-{
-echo "<a href='form.php'>Login To Continue</a>";
+{  
+$server = $_SERVER['SERVER_NAME'];
+header('Location: http://'.$server.'/logout.php');
 }
 
 

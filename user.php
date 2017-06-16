@@ -2,12 +2,15 @@
 <?php
 include 'databaseconfig.php';
 
+$date = date("Y-m-d");
+
 if ( $link->connect_errno ) {
   die( "Failed to connect to MySQL: (" . $link->connect_errno . ") " . $link->connect_error );
 }
 
+
 // Fetch the data
-$query = "SELECT Username,diff from analytics ORDER BY diff DESC LIMIT 5"; 
+$query = "SELECT Username,diff from analytics where date = '$date' ORDER BY diff DESC LIMIT 5"; 
 $result = $link->query( $query );
 
 // All good?

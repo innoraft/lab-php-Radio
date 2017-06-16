@@ -1,8 +1,3 @@
-<?php
-// $conn = mysql_connect("localhost","root","123");
-// $db = mysql_select_db("userdb",$conn);
-
-?>
 
 <?php
 include 'databaseconfig.php';

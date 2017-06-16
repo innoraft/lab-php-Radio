@@ -1,3 +1,14 @@
+<?php
+session_set_cookie_params(0);
+session_start();
+
+$uid = $_SESSION['userID'];
+// echo $uid;
+
+if (isset($uid)) {
+ 
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,23 +28,13 @@
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
 <a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
 <a href="welcome.php" class="a"><button class="button">HOME</button></a>
 <a href = "#" class = "left"><img src="Images/logo.png"></a>
 </div>
 
-<?php
-
-session_start();
-
-$uid = $_SESSION['userID'];
-// echo $uid;
-
-if (isset($uid)) {
- 
-
-?>
 <html>
 <head>
 
@@ -57,7 +58,7 @@ if (isset($uid)) {
 <form action="searchandadd.php">
 
 <div>
-    Search Videos: <input type="search" id="q" name="q" plceholder="Search Videos">
+    Search Videos: <input type="search" id="q" name="q" plceholder="Search Videos" required>
   </div>
   <div>
 
@@ -80,9 +81,12 @@ if (isset($uid)) {
 }
 
 else
-echo "<a href='form.php'>Login To Continue</a>";
+{  
+$server = $_SERVER['SERVER_NAME'];
+header('Location: http://'.$server.'/logout.php');
+}
 
-  ?>
+?>
 
 
 </body>

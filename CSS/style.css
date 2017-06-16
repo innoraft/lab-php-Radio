@@ -405,3 +405,9 @@ margin-left: 14px;
       transition: color 1s ease;
 
     }
+
+    .timeline {
+      margin: 0px;
+      float: right;
+    }
+

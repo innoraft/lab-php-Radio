@@ -1,8 +1,15 @@
+<?php
+session_start();
+$uid = $_SESSION['userID'];
+// echo $uid;
+if (isset($uid)) {
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Analytics</title>
-      <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
+  <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
 <!-- Styles -->
 <style>
@@ -184,6 +191,7 @@ var chart = AmCharts.makeChart( "chartdiv3", {
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
 <a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
+<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
 <a href="welcome.php" class="a"><button class="button">HOME</button></a>
@@ -192,13 +200,13 @@ SIGN OUT</button></a></button>
 
 <h2 style="margin-top: 94px;">Most Popular Song</h2>
 <div id="chartdiv"></div>
-<h2>Most Active User</h2>
+<h2>Most Active User Of The Day</h2>
 <div id ="chartdiv2"></div>
 <h2>Most Active Day</h2>
 <div id = "chartdiv3"></div>
-<h2>Most Active Time Of the Day</h2>
+<!-- <h2>Most Active Time Of the Day</h2> -->
 <!-- <div id="chartdiv5"></div> -->
-<form action="time.php" name="form" method="POST" id="form">
+<!-- <form action="time.php" name="form" method="POST" id="form">
  <fieldset>
           <legend>User Inputs</legend>
           <p>
@@ -215,7 +223,7 @@ SIGN OUT</button></a></button>
             <input type="submit" id="submit"  name="submitButton" value="Submit" class="button2">
 
 
-</fieldset>
+</fieldset> -->
 </form>
 
     <script type='text/javascript'>
@@ -258,4 +266,18 @@ SIGN OUT</button></a></button>
 <body>
 
 </body>
-</html>		
+</html>	
+<?php
+
+}
+
+else
+
+{
+  {  
+$server = $_SERVER['SERVER_NAME'];
+header('Location: http://'.$server.'/logout.php');
+}
+}
+
+?>	

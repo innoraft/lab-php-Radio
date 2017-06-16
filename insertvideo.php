@@ -18,7 +18,13 @@ include 'databaseconfig.php';
 $vid = $_GET['id'];
 session_start();
 $uid = $_SESSION['userID'];
-echo $uid;
+
+$date = date("Y-m-d");
+$time = date("h:i:sa");
+$stamp = date("G:i", strtotime($time));
+echo $date;
+echo "<br>";
+echo $stamp;
 
 
 // $vid = print_r($_GET);
@@ -39,8 +45,7 @@ if ($sql_row > 0)
 }
 
 else {
-$sql = "INSERT into video (userID,videoId) values ('$uid','$vid')";
-echo $sql;
+$sql = "INSERT into video (userID,videoId,date,time) values ('$uid','$vid','$date','$stamp')";
 $query = mysql_query($sql);
 
   if(!$query)

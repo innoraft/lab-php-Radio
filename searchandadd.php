@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$uid = $_SESSION['userID'];
+if (isset($uid)) {
+?>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +17,26 @@
   <script src="sweetalert-master/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
   <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
+
+  <link rel="stylesheet" href="CSS/WOW-master/css/libs/animate.css">
+
+ <script type="text/javascript" src="CSS/WOW-master/dist/wow.min.js"></script>
+
+  <script>
+  wow = new WOW(
+  {
+  boxClass:     'wow', 
+animateClass: 'animated',
+offset:       100
+}
+);
+wow.init();
+</script>
+ 
+<script src="js/wow.min.js"></script>
+              <script>
+              new WOW().init();
+</script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript">
@@ -104,12 +130,12 @@ function value()
 
 <body>
 
-
 <?php
-session_start();
 
-$uid = $_SESSION['userID'];
-if (isset($uid)) {
+  //For Next page
+if (!isset($_SESSION['nexttoken']))
+
+{
     //Change API key in this file
     include 'APIKEY.php';
     $search = $_GET["q"];
@@ -118,11 +144,6 @@ if (isset($uid)) {
     $_SESSION['max'] = $_GET['maxResults'];
     $max2 = $_SESSION['max'];
     $prev = $_SESSION['prevtoken'];
-
-  //For Next page
-if (!isset($_SESSION['nexttoken']))
-
-{
 
     $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=".$key."";
 
@@ -154,10 +175,11 @@ if (!isset($_SESSION['nexttoken']))
 
 ?>
 
-<div class = "navbar">
+<div class = "nav">
 <button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
 SIGN OUT</button></a></button>
 <button class="button"><a href="chart.php" class="a">ANALYTICS</a></button>
+<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
 <a href="welcome.php" class="a"><button class="button">HOME</button></a>
@@ -166,6 +188,7 @@ SIGN OUT</button></a></button>
 <div class="container">
 <div class="col-md-1"></div>
 <div class="col-md-10">
+
 <div class="formsearch">
 <?php
 
@@ -175,10 +198,10 @@ SIGN OUT</button></a></button>
         $title = rawurlencode($name);
         $thumbnail = $value1['snippet']['thumbnails']['medium']['url'];
         ?>
-                   <h4 class="title"> <?php echo $name; ?></h4>
+                   <h4 class="title wow fadeInDown"> <?php echo $name; ?></h4>
       <?php
         echo "<br>";
-        echo '<img src="'.$thumbnail.'" alt="thumbnail">';
+        echo '<img src="'.$thumbnail.'" class = "wow fadeInDown" alt="thumbnail">';
             $id = $value1['id']['videoId'];
 
             session_start();
@@ -212,7 +235,7 @@ SIGN OUT</button></a></button>
 
   
 <br>
-<a href="prev.php"><button class="button2">PREVIOUS</button></a>
+<a href="#"><button class="button2">PREVIOUS</button></a>
 <a href="next.php"><button class="button2" style="float: right;">NEXT</button></a>
 
 </div>
@@ -240,8 +263,9 @@ SIGN OUT</button></a></button>
 }
 
 else
-{
- echo "<a href='form.php'>Login To Continue</a>";
+{  
+$server = $_SERVER['SERVER_NAME'];
+header('Location: http://'.$server.'/logout.php');
 }
 
 

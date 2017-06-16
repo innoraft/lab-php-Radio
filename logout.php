@@ -31,14 +31,12 @@ if (!$run) {
 }
 
 $sql = "SELECT time,logout from analytics where date = '$date' and Username = '$Username'";
-echo $sql;
 $arr = array();
 if ($res=mysqli_query($db2,$sql)) {
 while ($arr=mysqli_fetch_row($res)) {
 	$login = $arr[0];
 	$logout = $arr[1];
 	$diff = $logout - $login;
-	echo $diff;
 }
 mysqli_free_result($res);
 }

@@ -1,16 +1,33 @@
 <?php
-
-include '../databaseconfig.php';
 session_start();
-$uid = $_SESSION['userID'];
-if (isset($uid)) {
+include '../databaseconfig.php';
+$uid = $_SESSION['play'];
 
+$server = $_SERVER['SERVER_NAME'];
+$row = array();
+$arr = array();
+
+$userid = $_SESSION['userID']; 
+
+if (isset($userid)) {
+
+if ($uid == $userid) {
+
+header('Location: http://'.$server.'/showplaylist.php');
+
+	
+}
+
+else
+
+{
+	
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Public Playlist</title>
+	<title>User Playlist</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
@@ -26,7 +43,7 @@ if (isset($uid)) {
 
  <script type="text/javascript" src="../CSS/WOW-master/dist/wow.min.js"></script>
 
-<script>
+ <script>
   wow = new WOW(
   {
   boxClass:     'wow', 
@@ -40,18 +57,7 @@ wow.init();
 <script src="js/wow.min.js"></script>
               <script>
               new WOW().init();
-              </script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
-
-<script type="text/JavaScript">
-function timeRefresh(timeoutPeriod) 
-{
-	setTimeout("location.reload(true);",timeoutPeriod);
-}
 </script>
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -69,30 +75,6 @@ function timeRefresh(timeoutPeriod)
                         data: '',
                         success: function(data) {
                             // document.getElementById("demo").innerHTML = "ADDED! ";
-                        },  
-                    });
-                });
-       
-});     
-</script>
-
-<script type="text/javascript">
-    $( document ).ready(function() {
-        console.log( "which_user?" );
-        $("#user > button").on("click", function(event) {
-                    console.log(this.id);
-                    var id = this.id;
-                    var url = "userid.php?id=" + id;
-                    var server = window.location.hostname;
-              console.log(url);
-                    event.preventDefault();
-                    $.ajax({
-                        type: "GET",
-                        url: url,
-                        data: '',
-                        success: function(data) {
-                          var newWindow = window.open("","_self");
-                          newWindow.location.href = "http://"+ server +"/User_Data/userplaylist.php";
                         },  
                     });
                 });
@@ -122,9 +104,6 @@ function timeRefresh(timeoutPeriod)
                 });
            });     
     </script>
-
-
-
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -167,9 +146,10 @@ function value()
     });
 </script>
 
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+
 </head>
-<body onLoad="JavaScript:timeRefresh(120000);">
+<body>
 
 <div class = "nav">
 <button class = "button"><a href = "../logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -182,67 +162,45 @@ SIGN OUT</button></a></button>
 <a href = "#" class = "left"><img src="../Images/logo.png"></a>
 </div>
 
-
-
-<h2 style="text-align: center;margin-top: 80px;" class="wow bounceInDown"><strong>Public Playlists</strong></h2>
+<div class="formsearch">
+<h2 style="text-align: center;" class="wow bounceInDown"><strong>Playlist</strong></h2>
 
 <?php
 
-$row = array();
-$arr = array();
-$data = array();
-$sql = "SELECT * from video ORDER BY date DESC LIMIT 100";
-$result=mysql_query($sql);
-// $result=$db2->query($sql);
+	$sql = "SELECT videoId from video where userID = '$uid'";
+	$query = mysql_query($sql);
 
-if ($result > 0) {
-	while ($row = mysql_fetch_array($result)) {
-		$uid = $row['userID'];
-		$vid = $row['videoId'];
-    $date = $row['date'];
-    $time = $row['time'];
-		$query = "SELECT NAME from users where userID = '$uid'";
-		$fetchtitle = "SELECT title from counter where videoId = '$vid'";
-		$fetched = mysql_query($fetchtitle);
-		$res = mysql_query($query);
+	if (!$query) {
+		echo "Failed".mysql_error();
+	}
 
-		if (!$res) {
-			echo "Failed".mysql_error();
-		}
+	if ($query > 0) {
+		while ($row = mysql_fetch_array($query)) {
+			$vid = $row['videoId'];
 
-		if ($res > 0) {
-			while ($arr = mysql_fetch_array($res)) {
-				$Username = $arr['NAME'];
-			}
+			$querytitle = "SELECT title from counter where videoId ='$vid'";
+			$res = mysql_query($querytitle);
 
-			if (!$fetched) {
+			if (!$res) {
 				echo "Failed".mysql_error();
 			}
 
-			if ($fetched > 0) {
-				while ($data = mysql_fetch_array($fetched)) {
-					$title = $data['title'];
-
+			if ($res > 0) {
+				while ($arr = mysql_fetch_array($res)) {
+					$title = $arr['title'];
 					?>
-          <div class="formsearch wow fadeInDown">
-
-					<p><?php echo $Username;?> added <strong><?php echo $title;?></strong> to Playlist</p>
-
-					     <span>
+    					<h4 class="title wow fadeInDown"> <?php echo $title; ?></h4>
+    					<br>
+    					<span>
 		            <button class="js-open-modal2 button2" data-id=<?php echo $vid;?> href="#" data-modal-id="popup">Show Video</button>
 
 		            <a href="#" id="demo" ><button type='button' name='button' id=<?php echo $vid; ?> class=<?php echo $title;?> method='POST' style='background-color: #bb0000;color: #fff;font-family: Sans-serif;text-align: center;border: 0;transition: all 0.3s ease 0s;padding: 5px;'>Add To Playlist</button></a>
                       <br>
                       <br>
-                      <a href="#" id="user"><button id=<?php echo $uid;?> name="button" type="button" class="button2">Show <?php echo $Username;?>'s Playlist</button></a>
-                      <br>
 
-                      <p class="timeline"><?php echo $date;?></p>
-                      <br>
-                      <p class="timeline"><?php echo $time;?></p>
 					</span>
-          </div>
-          <div id="popup" class="modal-box" role = "dialog"> 
+
+					  <div id="popup" class="modal-box" role = "dialog"> 
                       <header>
                       <a href="#" class="js-modal-close close" onclick="value('clear')">CLOSE</a>
                       </header>
@@ -253,24 +211,22 @@ if ($result > 0) {
                       <a href="#" class="js-modal-close" onclick="value('clear')">Close</a>
                       </footer>
                       </div>
+              <?php
 
-					<?php
-				}
-			}
-
-		}
-
-	}
+        }
+      }
+    }
+  }
 }
 
 }
 
 else
-{  
+{
 $server = $_SERVER['SERVER_NAME'];
 header('Location: http://'.$server.'/logout.php');
 }
-
 ?>
+</div>
 </body>
 </html>
