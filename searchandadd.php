@@ -101,7 +101,7 @@ function value()
       var myvideoId = $(this).data('id');
       var iframe = document.createElement("iframe");
       iframe.setAttribute("src",
-          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+          "//www.youtube.com/embed/"+myvideoId+"?autoplay=1"); 
             iframe.style.width = "640px";
         iframe.style.height = "480px";
       $("#player").append(iframe);
