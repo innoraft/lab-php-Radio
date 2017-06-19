@@ -124,6 +124,27 @@ function timeRefresh(timeoutPeriod)
     </script>
 
 
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "watch" );
+        $("#count > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var title = $(this).attr('class');
+                    console.log(title);
+                    var url = "mostwatched.php?id=" +id+"&title=" +title;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
+                        },  
+                    });
+                });
+           });     
+    </script>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -184,14 +205,14 @@ SIGN OUT</button></a></button>
 
 
 
-<h2 style="text-align: center;margin-top: 80px;" class="wow bounceInDown"><strong>Public Playlists</strong></h2>
+<h2 style="text-align: center;margin-top: 80px;" class="wow bounceInDown"><strong>User Activity</strong></h2>
 
 <?php
 
 $row = array();
 $arr = array();
 $data = array();
-$sql = "SELECT * from video ORDER BY date DESC LIMIT 100";
+$sql = "SELECT * from video ORDER BY date DESC, time DESC LIMIT 100";
 $result=mysql_query($sql);
 // $result=$db2->query($sql);
 
@@ -229,7 +250,7 @@ if ($result > 0) {
 					<p><?php echo $Username;?> added <strong><?php echo $title;?></strong> to Playlist</p>
 
 					     <span>
-		            <button class="js-open-modal2 button2" data-id=<?php echo $vid;?> href="#" data-modal-id="popup">Show Video</button>
+		          <a href="#" id="count"><button class="js-open-modal2 button2" id ="<?php echo $vid ?>";" data-id=<?php echo $vid;?> href="#" data-modal-id="popup">Show Video</button></a>
 
 		            <a href="#" id="demo" ><button type='button' name='button' id=<?php echo $vid; ?> class=<?php echo $title;?> method='POST' style='background-color: #bb0000;color: #fff;font-family: Sans-serif;text-align: center;border: 0;transition: all 0.3s ease 0s;padding: 5px;'>Add To Playlist</button></a>
                       <br>
