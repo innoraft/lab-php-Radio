@@ -14,6 +14,7 @@ Most active day
 Most active user
 Most active time of the day
 6. Users can see who were online between the time inputed by them.
+7. They can view the Timeline to see the user activity.
 
 DEPLOYMENT STEPS -  
 
@@ -23,5 +24,6 @@ DEPLOYMENT STEPS -
 4. In the credentials tab, obtain the API key for the Data API.
 5. In the ‘APIKEY.php’ file, API key can be replaced.
 6. Database credentials can be changed in the ‘databaseconfig.php.example’ file, run the file as databaseconfig.php.
-7. On running databasecreate.php file it will create the database and the required tables.
-8. The landing page of the application will be ‘index.html’ file where the users will have to sign up or log in.
+7. Database name can be changed in 'databasecreate.php'.
+8. On running 'databasecreate.php' file it will create the database and the required tables.
+9. The landing page of the application will be ‘index.html’ file where the users will have to sign up or log in.

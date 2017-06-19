@@ -1,18 +1,21 @@
 <?php
 include 'databaseconfig.php';
-//creating the database
 
+//Creating Database
 mysql_query("CREATE database userdb");
 
+//Selecting Database
 mysql_query("use userdb");
 
 //Creating the tables
-
 mysql_query("CREATE TABLE IF NOT EXISTS `analytics` (
   `Username` varchar(50) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `time` time DEFAULT NULL
+  `time` time DEFAULT NULL,
+  `logout` time DEFAULT NULL,
+  `diff` varchar(10) DEFAULT NULL
 )");
+
 mysql_query("CREATE TABLE IF NOT EXISTS `counter` (
   `videoId` varchar(20) DEFAULT NULL,
   `count` int(20) DEFAULT NULL,
@@ -37,7 +40,9 @@ mysql_query("CREATE TABLE IF NOT EXISTS `users` (
 
 mysql_query("CREATE TABLE IF NOT EXISTS `video` (
   `userID` varchar(10) NOT NULL,
-  `videoId` varchar(20) DEFAULT NULL
+  `videoId` varchar(20) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL
 )");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `playlist` (

@@ -1,3 +1,4 @@
+
 <?php
 $conn = mysql_connect("localhost","root","Enter your password");
 $db = mysql_select_db("database_name",$conn);
