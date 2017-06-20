@@ -36,7 +36,10 @@ if ($res=mysqli_query($db2,$sql)) {
 while ($arr=mysqli_fetch_row($res)) {
 	$login = $arr[0];
 	$logout = $arr[1];
-	$diff = $logout - $login;
+  $conlogin = strtotime($login);
+  $conlogout = strtotime($logout);
+  $diff = ($conlogout - $conlogin)/60;
+
 }
 mysqli_free_result($res);
 }
