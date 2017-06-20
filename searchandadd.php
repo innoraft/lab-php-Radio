@@ -200,9 +200,8 @@ if (!isset($_SESSION['nexttoken']))
 ?>
 
 <div class = "nav">
-<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
-SIGN OUT</button></a></button>
-<button class="button"><a href="chart.php" class="a">ANALYTICS</a></button>
+<a href="logout.php" class="a"><button class="button"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</button></a>
+<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
 <a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
 <a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>

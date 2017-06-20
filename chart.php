@@ -236,8 +236,8 @@ var chart = AmCharts.makeChart( "chartdiv3", {
 
 <!-- HTML -->
 <div class = "navbar">
-<button class = "button"><a href = "logout.php" class = "a"><i class="fa fa-sign-out" aria-hidden="true"></i>
-SIGN OUT</button></a></button>
+
+<a href="logout.php" class="a"><button class="button"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</button></a>
 <a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
 <a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
 <a href="input.php" class="a"><button class="button">SEARCH</button></a>
