@@ -1,29 +1,21 @@
-
+	
 <?php
-// session_start();
-// $uid = $_SESSION['userID'];
-// // echo $uid;
-// if (isset($uid))
-// {
-  
-// Connect to MySQL
-// $link = new mysqli( 'localhost', 'root', '123', 'userdb' );
 
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 
 
-if ( $link->connect_errno ) {
-  die( "Failed to connect to MySQL: (" . $link->connect_errno . ") " . $link->connect_error );
+if ( $db2->connect_errno ) {
+  die( "Failed to connect to MySQL: (" . $db2->connect_errno . ") " . $db2->connect_error );
 }
 
 // Fetch the data
 $query = "SELECT date, COUNT(*) as c from analytics GROUP BY date ORDER BY c DESC LIMIT 5;"; 
-$result = $link->query( $query );
+$result = $db2->query( $query );
 
 // All good?
 if ( !$result ) {
   // Nope
-  $message  = 'Invalid query: ' . $link->error . "n";
+  $message  = 'Invalid query: ' . $db2->error . "n";
   $message .= 'Whole query: ' . $query;
   die( $message );
 }
@@ -41,7 +33,7 @@ while ( $row = $result->fetch_assoc() ) {
 echo json_encode($data);
 
 // Close the connection
-mysqli_close($link);
+mysqli_close($db2);
 
 ?>
 

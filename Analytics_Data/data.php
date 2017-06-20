@@ -8,7 +8,7 @@
   
 // Connect to MySQL
 // $link = new mysqli( 'localhost', 'root', '123', 'userdb' );
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 
 if ( $link->connect_errno ) {
   die( "Failed to connect to MySQL: (" . $link->connect_errno . ") " . $link->connect_error );
