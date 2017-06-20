@@ -3,7 +3,7 @@
 
 <?php
 
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 
 
   $UserName = $_GET['name'];

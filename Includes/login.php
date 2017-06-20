@@ -1,6 +1,6 @@
 
 <?php
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 session_start();
 
   $mail=$_GET['email'];

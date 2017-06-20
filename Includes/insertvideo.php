@@ -6,9 +6,8 @@
 <body>
 
 <?php
-// $conn = mysql_connect("localhost","root","123");
-// $db = mysql_select_db("userdb",$conn);
-include 'databaseconfig.php';
+
+include '../databaseconfig.php';
 
 ?>
 <?php
@@ -56,9 +55,6 @@ $query = mysql_query($sql);
 
 }
 ?>
-
-<p>ADDED!</p>
-
 
 </body>
 </html>

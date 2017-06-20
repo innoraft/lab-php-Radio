@@ -5,7 +5,7 @@
 ?>
 
 <?php
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 
 // $vid =  '34Na4j8AVgA' ;
 $vid = $_GET['id'];

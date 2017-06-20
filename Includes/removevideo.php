@@ -1,6 +1,6 @@
 
 <?php
-include 'databaseconfig.php';
+include '../databaseconfig.php';
 
 
 $rem = $_GET['id'];
