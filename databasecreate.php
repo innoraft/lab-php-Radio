@@ -13,7 +13,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `analytics` (
   `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `logout` time DEFAULT NULL,
-  `diff` varchar(10) DEFAULT NULL
+  `diff` varchar(100) DEFAULT NULL
 )");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `counter` (
@@ -49,6 +49,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `playlist` (
   `Username` varchar(20) DEFAULT NULL,
   `playlistname` varchar(20) DEFAULT NULL,
   `userID` varchar(10) DEFAULT NULL
+)");
+
+mysql_query("CREATE TABLE IF NOT EXISTS `watch` (
+  `userID` varchar(10) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL
 )");
 
 ?>
