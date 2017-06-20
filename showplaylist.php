@@ -53,7 +53,7 @@ function value()
     $("#remove > button").on("click", function(event) {
                 console.log(this.id);
                 var id = this.id;
-                var url = "removevideo.php?id=" + id;
+                var url = "Includes/removevideo.php?id=" + id;
           console.log(url);
                 event.preventDefault();
                 $.ajax({
@@ -82,6 +82,27 @@ function value()
 });     
         </script>
 
+<script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "countwatced!" );
+        $("#count > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var url = "User_Data/mostwatched.php?id=" + id;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
+                        },  
+                    });
+                });
+       
+});     
+</script>
+
         <script>
   $(function(){
     console.log("fetchid!");
@@ -91,7 +112,7 @@ function value()
       // $("#videoId").text( myvideoId);
           var iframe = document.createElement("iframe");
         iframe.setAttribute("src",
-          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+          "//www.youtube.com/embed/"+myvideoId+"?autoplay=1"); 
             iframe.style.width = "640px";
         iframe.style.height = "480px";
       $("#player").append(iframe);
@@ -176,7 +197,7 @@ if ($res2 > 0) {
               <button type="button" id="<?php echo $id;?>" name="button" class="button2" method = "POST">Remove From Playlist</button>
               </form>
               <br>
-              <button class="js-open-modal2 button2" data-id="<?php echo $id;?>" href="#" data-modal-id="popup">Show Video</button>
+              <a href="#" id="count"><button class="js-open-modal2 button2" id ="<?php echo $id; ?>" data-id="<?php echo $id;?>" href="#" data-modal-id="popup">Show Video</button></a>
               <br>
                       <div id="popup" class="modal-box" role = "dialog"> 
                       <header>
@@ -211,5 +232,3 @@ header('Location: http://'.$server.'/logout.php');
 
 </body>
 </html>
-
-

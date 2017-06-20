@@ -20,8 +20,7 @@ header('Location: http://'.$server.'/showplaylist.php');
 
 else
 
-{
-	
+{	
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,7 +65,7 @@ wow.init();
         $("#demo > button").on("click", function(event) {
                     console.log(this.id);
                     var id = this.id;
-                    var url = "../insertvideo.php?id=" + id;
+                    var url = "../Includes/insertvideo.php?id=" + id;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -90,7 +89,7 @@ wow.init();
                     var id = this.id;
                     var title = $(this).attr('class');
                     console.log(title);
-                    var url = "../countvideo.php?id=" +id+"&title=" +title;
+                    var url = "../Includes/countvideo.php?id=" +id+"&title=" +title;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -99,6 +98,28 @@ wow.init();
                         data: '',
                         success: function(data) {
                           swal("Added!", "Check Playlist", "success")
+                        },  
+                    });
+                });
+           });     
+    </script>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "watch" );
+        $("#count > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var title = $(this).attr('class');
+                    console.log(title);
+                    var url = "mostwatched.php?id=" +id+"&title=" +title;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
                         },  
                     });
                 });
@@ -121,7 +142,7 @@ function value()
       var myvideoId = $(this).data('id');
       var iframe = document.createElement("iframe");
       iframe.setAttribute("src",
-          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+          "//www.youtube.com/embed/"+myvideoId+"?autoplay=1"); 
             iframe.style.width = "640px";
         iframe.style.height = "480px";
       $("#player").append(iframe);
@@ -192,7 +213,7 @@ SIGN OUT</button></a></button>
     					<h4 class="title wow fadeInDown"> <?php echo $title; ?></h4>
     					<br>
     					<span>
-		            <button class="js-open-modal2 button2" data-id=<?php echo $vid;?> href="#" data-modal-id="popup">Show Video</button>
+		          <a href="#" id="count"><button class="js-open-modal2 button2" id = "<?php echo $vid;?>" data-id=<?php echo $vid;?> href="#" data-modal-id="popup">Show Video</button></a>
 
 		            <a href="#" id="demo" ><button type='button' name='button' id=<?php echo $vid; ?> class=<?php echo $title;?> method='POST' style='background-color: #bb0000;color: #fff;font-family: Sans-serif;text-align: center;border: 0;transition: all 0.3s ease 0s;padding: 5px;'>Add To Playlist</button></a>
                       <br>

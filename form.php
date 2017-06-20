@@ -36,7 +36,7 @@ function validateForm() {
 <div class = "background">
 <div class = "form">
 <div id="output"></div>
-<form name = "myForm" id="myForm" action = "login.php" onsubmit= "return validateForm()" method = "post">
+<form name = "myForm" id="myForm" action = "Includes/login.php" onsubmit= "return validateForm()" method = "post">
                   <label>Email     :</label><input type = "text" name = "email" class = "box" id="email" /><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" id="password" required/><br/><br />
                   <input type = "submit" name="submit" value = " Submit " class = "button2"/><br />
@@ -51,7 +51,7 @@ function validateForm() {
       event.preventDefault();
       var email = $('#email').val();
       var password = $('#password').val();
-          url = "login.php?email=" +email+"&password=" +password;
+          url = "Includes/login.php?email=" +email+"&password=" +password;
           $.ajax({
                     type: "GET",
                     url: url,

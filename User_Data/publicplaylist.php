@@ -60,7 +60,7 @@ function timeRefresh(timeoutPeriod)
         $("#demo > button").on("click", function(event) {
                     console.log(this.id);
                     var id = this.id;
-                    var url = "../insertvideo.php?id=" + id;
+                    var url = "../Includes/insertvideo.php?id=" + id;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -108,7 +108,7 @@ function timeRefresh(timeoutPeriod)
                     var id = this.id;
                     var title = $(this).attr('class');
                     console.log(title);
-                    var url = "../countvideo.php?id=" +id+"&title=" +title;
+                    var url = "../Includes/countvideo.php?id=" +id+"&title=" +title;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -163,7 +163,7 @@ function value()
       var myvideoId = $(this).data('id');
       var iframe = document.createElement("iframe");
       iframe.setAttribute("src",
-          "//www.youtube.com/embed/"+myvideoId+"?enablejsapi=1"); 
+          "//www.youtube.com/embed/"+myvideoId+"?autoplay=1"); 
             iframe.style.width = "640px";
         iframe.style.height = "480px";
       $("#player").append(iframe);

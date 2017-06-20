@@ -33,7 +33,7 @@ function validateForm() {
 <div class = "background">
 <div class = "form">
 <div id="output"></div>
-<form name = "myForm" id="myForm" action = "config.php" onsubmit="return validateForm()" method = "post">
+<form name = "myForm" id="myForm" action = "Includes/config.php" onsubmit="return validateForm()" method = "post">
 
                   <label>UserName  :</label><input type = "text" name = "username" class = "box" id="name" /><br /><br />
 
@@ -53,7 +53,7 @@ function validateForm() {
       var name = $('#name').val();
       var email = $('#email').val();
       var password = $('#password').val();
-          url = "config.php?email=" +email+"&password=" +password+"&name="+name;
+          url = "Includes/config.php?email=" +email+"&password=" +password+"&name="+name;
           $.ajax({
                     type: "GET",
                     url: url,

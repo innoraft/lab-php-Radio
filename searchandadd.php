@@ -45,7 +45,7 @@ wow.init();
         $("#demo > button").on("click", function(event) {
                     console.log(this.id);
                     var id = this.id;
-                    var url = "insertvideo.php?id=" + id;
+                    var url = "Includes/insertvideo.php?id=" + id;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -70,7 +70,7 @@ wow.init();
                     var id = this.id;
                     var title = $(this).attr('class');
                     console.log(title);
-                    var url = "countvideo.php?id=" +id+"&title=" +title;
+                    var url = "Includes/countvideo.php?id=" +id+"&title=" +title;
               console.log(url);
                     event.preventDefault();
                     $.ajax({
@@ -84,6 +84,30 @@ wow.init();
                 });
            });     
     </script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "countwatced!" );
+        $("#count > button").on("click", function(event) {
+                    console.log(this.id);
+                    var id = this.id;
+                    var url = "User_Data/mostwatched.php?id=" + id;
+              console.log(url);
+                    event.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: '',
+                        success: function(data) {
+                          // alert(data); 
+                        },  
+                    });
+                });
+       
+});     
+</script>
+
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -222,7 +246,7 @@ SIGN OUT</button></a></button>
 
 ?>
             <br>
-            <button class="js-open-modal2 button2" data-id=<?php echo $id;?> href="#" data-modal-id="popup">Show Video</button>
+            <a href="#" id="count"><button class="js-open-modal2 button2" id=<?php echo $title; ?>  data-id=<?php echo $id;?> href="#" data-modal-id="popup">Show Video</button></a>
             <br>
 <?php
 
