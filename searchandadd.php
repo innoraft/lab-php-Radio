@@ -157,7 +157,7 @@ function value()
 <?php
 
   //For Next page
-if (!isset($_SESSION['nexttoken']))
+if (!isset($_SESSION['nexttoken']) && !isset($_SESSION['prevtoken']))
 
 {
     //Change API key in this file
@@ -167,7 +167,6 @@ if (!isset($_SESSION['nexttoken']))
     $search2 = $_SESSION['search'];
     $_SESSION['max'] = $_GET['maxResults'];
     $max2 = $_SESSION['max'];
-    $prev = $_SESSION['prevtoken'];
 
     $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" .$_SESSION['max']. "&order=relevance&q=" .$_SESSION['search']. "&key=".$key."";
 
@@ -187,6 +186,8 @@ if (!isset($_SESSION['nexttoken']))
     $xyz = $_SESSION['nexttoken'];
 }
 
+
+
 // $inactive = 120; 
 // ini_set('session.gc_maxlifetime', $inactive); 
 
@@ -199,15 +200,19 @@ if (!isset($_SESSION['nexttoken']))
 
 ?>
 
-<div class = "nav">
-<a href="logout.php" class="a"><button class="button"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</button></a>
-<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
-<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
-<a href="input.php" class="a"><button class="button">SEARCH</button></a>
-<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
-<a href="welcome.php" class="a"><button class="button">HOME</button></a>
-<a href = "#" class = "left"><img src="Images/logo.png"></a>
+<div class="nav">
+    <div class="col-sm-2 abc"><a href="http://www.innoraft.com/" class="left" style="background: none;"><img src="Images/logo.png"></a></div>
+    <div class="col-sm-10">
+        <div class="col-sm-2 xyz"><a href="welcome.php" class="a">HOME</a></div>
+        <div class="col-sm-2 xyz"><a href="input.php" class="a">SEARCH</a></div>
+        <div class="col-sm-2 xyz"><a href="showplaylist.php" class="a">PLAYLIST</a></div>
+        <div class="col-sm-2 xyz"><a href="User_Data/publicplaylist.php" class="a">TIMELINE</a></div>
+        <div class="col-sm-2 xyz"><a href="chart.php" class="a">ANALYTICS</a></div>
+        <div class="col-sm-2 xyz"><a href="logout.php" class="a"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</a></div>
+      </div>
 </div>
+
+
 <div class="container">
 <div class="col-md-1"></div>
 <div class="col-md-10">

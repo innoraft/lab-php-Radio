@@ -172,15 +172,16 @@ function value()
 </head>
 <body>
 
-<div class = "nav">
-
-<a href="../logout.php" class="a"><button class="button"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</button></a>
-<a href="../chart.php" class="a"><button class="button">ANALYTICS</button></a>
-<a href="publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
-<a href="../input.php" class="a"><button class="button">SEARCH</button></a>
-<a href="../showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
-<a href="../welcome.php" class="a"><button class="button">HOME</button></a>
-<a href = "#" class = "left"><img src="../Images/logo.png"></a>
+<div class="nav">
+    <div class="col-sm-2 abc"><a href="http://www.innoraft.com/" class="left" style="background: none;"><img src="../Images/logo.png"></a></div>
+    <div class="col-sm-10">
+        <div class="col-sm-2 xyz"><a href="../welcome.php" class="a">HOME</a></div>
+        <div class="col-sm-2 xyz"><a href="../input.php" class="a">SEARCH</a></div>
+        <div class="col-sm-2 xyz"><a href="../showplaylist.php" class="a">PLAYLIST</a></div>
+        <div class="col-sm-2 xyz"><a href="publicplaylist.php" class="a">TIMELINE</a></div>
+        <div class="col-sm-2 xyz"><a href="../chart.php" class="a">ANALYTICS</a></div>
+        <div class="col-sm-2 xyz"><a href="../logout.php" class="a"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</a></div>
+      </div>
 </div>
 
 <div class="formsearch">

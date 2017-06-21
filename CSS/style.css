@@ -87,8 +87,9 @@ text-align: center;
 
 .left {
 
-float: left;
-margin-top: 16px;
+    float: left;
+    padding: 5px;
+    padding-left: 0;x;
 
 }
 
@@ -98,6 +99,21 @@ background-color: #660000;
 /*position: fixed;*/
 
 
+}
+
+.col-sm-2.abc {
+    background: white;
+}
+
+.col-sm-2.xyz {
+    padding: 10px;
+    text-align: center;
+    font-size: 21px;
+    transition: all 0.3s ease 0s;
+}
+
+.col-sm-2.xyz:hover{
+    background: #990000;
 }
 
 .navbar{
@@ -394,6 +410,10 @@ margin-left: 14px;
       text-align: center;
 
     }
+
+    a.js-modal-close.close {
+    opacity: 1;
+}
 
      
 
