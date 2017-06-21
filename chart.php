@@ -15,13 +15,13 @@ if (isset($uid)) {
 <style>
 #chartdiv {
   width   : 100%;
-  height    : 565px;
+  height    : 730px;
   font-size : 11px;
 }	
 
 #chartdiv1 {
   width   : 100%;
-  height    : 565px;
+  height    : 730px;
   font-size : 11px;
 } 
 
