@@ -11,6 +11,10 @@ if (isset($uid)) {
   <title>Analytics</title>
   <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -60,6 +64,9 @@ if (isset($uid)) {
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <script src="http://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <link rel="stylesheet" type="text/css" href="CSS/style.css"/>
 
@@ -235,15 +242,16 @@ var chart = AmCharts.makeChart( "chartdiv3", {
 </script>
 
 <!-- HTML -->
-<div class = "navbar">
-
-<a href="logout.php" class="a"><button class="button"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</button></a>
-<a href="chart.php" class="a"><button class="button">ANALYTICS</button></a>
-<a href="User_Data/publicplaylist.php" class="a"><button class="button">TIMELINE</button></a>
-<a href="input.php" class="a"><button class="button">SEARCH</button></a>
-<a href="showplaylist.php" class="a"><button class="button">PLAYLIST</button></a>
-<a href="welcome.php" class="a"><button class="button">HOME</button></a>
-<a href = "#" class = "left"><img src="Images/logo.png"></a>
+<div class="nav">
+    <div class="col-sm-2 abc"><a href="http://www.innoraft.com/" class="left" style="background: none;"><img src="Images/logo.png"></a></div>
+    <div class="col-sm-10">
+        <div class="col-sm-2 xyz"><a href="welcome.php" class="a">HOME</a></div>
+        <div class="col-sm-2 xyz"><a href="input.php" class="a">SEARCH</a></div>
+        <div class="col-sm-2 xyz"><a href="showplaylist.php" class="a">PLAYLIST</a></div>
+        <div class="col-sm-2 xyz"><a href="User_Data/publicplaylist.php" class="a">TIMELINE</a></div>
+        <div class="col-sm-2 xyz"><a href="chart.php" class="a">ANALYTICS</a></div>
+        <div class="col-sm-2 xyz"><a href="logout.php" class="a"><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</a></div>
+      </div>
 </div>
 
 <h2 style="margin-top: 94px;">Most Popular Video</h2>
